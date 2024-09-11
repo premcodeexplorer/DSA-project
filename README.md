@@ -1,3 +1,5 @@
 # DSA-project
 
-# PremBaba - Dijkstras Algorithm
+# Prem Baba - Hashing
+
+# Om - Dijkstra's Algorithm
