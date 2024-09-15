@@ -1,0 +1,110 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    overflow: hidden;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #e0e0e0;
+    padding: 20px;
+    overflow-y: auto;
+    position: fixed;
+    height: 100%;
+    left: 0;
+    top: 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.sidebar a {
+    display: block;
+    color: #333;
+    padding: 10px 15px;
+    text-decoration: none;
+    margin-bottom: 5px;
+    border-radius: 6px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar a:hover, .sidebar a.active {
+    background-color: #2e7d32;
+    color: white;
+}
+
+.content {
+    margin-left: 270px; /* Increase this value to move content further right */
+    padding: 30px;
+    overflow-y: auto;
+    width: calc(100% - 270px); /* Adjust according to sidebar width */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    height: 100%;
+    background-color: #ffffff; /* Ensure the background color is white */
+}
+
+.content h1 {
+    color: #2e7d32;
+    border-bottom: 2px solid #2e7d32;
+    padding-bottom: 10px;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.content p {
+    line-height: 1.6;
+    color: #333;
+}
+
+.content ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.content ul li {
+    margin-bottom: 10px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 15px 30px;
+    margin: 10px 0;
+    font-size: 18px;
+    color: white;
+    background-color: #2e7d32;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    background-color: #1b5e20;
+    transform: translateY(-3px);
+}
+
+.btn:active {
+    background-color: #43a047;
+    transform: translateY(0);
+}
