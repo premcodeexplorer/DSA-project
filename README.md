@@ -11,4 +11,6 @@ The DSA Project is similar to a virtual lab where we explain fundamental algorit
 The following individuals are working on this project:
 
 - **Prem Baba** – Hashing
+- **Pihu Patne** – Quick Sort
+
 
