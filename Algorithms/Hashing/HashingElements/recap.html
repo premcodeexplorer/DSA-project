@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hashing Algorithm - Recap</title>
+    <link rel="stylesheet" href="../hashing.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar" id="sidebar">
+            <h2>Hashing Algorithm</h2>
+            <a href="../hashing.html">Home</a>
+            <a href="aim.html">Aim</a>
+            <a href="overview.html">Overview</a>
+            <a href="recap.html" class="active">Recap</a>
+            <a href="pretest.html">Pretest</a>
+            <a href="divide-conquer.html">Divide and Conquer</a>
+            <a href="hashing.html">Hashing Algorithm</a>
+            <a href="code-assessment.html">Code Assessment</a>
+            <a href="analysis.html">Analysis</a>
+            <a href="posttest.html">Posttest</a>
+            <a href="references.html">Further Readings/References</a>
+            <a href="feedback.html">Feedback</a>
+        </div>
+        <div class="content">
+            <h1>Recap of Hashing Algorithm</h1>
+
+            <h2>Pictorial Representation of Hashing</h2>
+            <p>This section illustrates how hashing works with both unsorted and sorted arrays.</p>
+
+            <h2>Importance of Hashing in Real Life</h2>
+            <p>Hashing plays a crucial role in several real-life applications, making data easy to visualize and retrieve more efficiently:</p>
+            <ul>
+                <li><strong>Searching:</strong> Hashing allows for efficient data retrieval, making it possible to find items quickly without needing to sort the data first.</li>
+                <li><strong>Data Integrity:</strong> Hashing ensures data integrity by generating unique hashes for files or messages, which can be verified later.</li>
+                <li><strong>Indexing:</strong> In databases, hashing is used to index data for faster access, improving overall performance.</li>
+                <li><strong>Password Storage:</strong> Hashing algorithms are used to securely store passwords in databases, ensuring that even if the data is compromised, the passwords remain safe.</li>
+                <li><strong>Data Deduplication:</strong> Hashing can identify duplicate data by comparing hashes rather than the data itself, saving storage space.</li>
+            </ul>
+
+            <h2>Types of Hashing Techniques</h2>
+            <p>There are various techniques for hashing data. Here are some widely used hashing techniques:</p>
+            <ul>
+                <li>Division Hashing</li>
+                <li>Multiplication Hashing</li>
+                <li>Universal Hashing</li>
+                <li>Cryptographic Hashing</li>
+            </ul>
+
+            <h2>Categories of Hashing</h2>
+            <p>Hashing techniques can be categorized as follows:</p>
+            <h3>Static and Dynamic Hashing</h3>
+            <ul>
+                <li><strong>Static Hashing:</strong> The hash table size is fixed. It is simple but may lead to inefficiencies if the table gets full.</li>
+                <li><strong>Dynamic Hashing:</strong> The hash table can grow or shrink as needed, allowing for more flexible and efficient storage.</li>
+            </ul>
+
+            <h3>Open Addressing and Chaining</h3>
+            <ul>
+                <li><strong>Open Addressing:</strong> If a collision occurs, the algorithm looks for the next available slot in the hash table.</li>
+                <li><strong>Chaining:</strong> Each slot in the hash table contains a linked list of entries that hash to the same index.</li>
+            </ul>
+
+            <h2>What is Time and Space Complexity?</h2>
+            <p>Time complexity of a hashing algorithm describes the time taken to execute as a function of the input size. Similarly, space complexity quantifies the memory required. For instance:</p>
+            <ul>
+                <li>Inserting or searching an element in a hash table has an average time complexity of O(1).</li>
+                <li>If there are many collisions, the time complexity may degrade to O(n) in the worst case.</li>
+                <li>Space complexity typically depends on the number of elements stored and the size of the hash table.</li>
+            </ul>
+
+            
+            <div class="next-button">
+                <a href="pretest.html">Next</a>
+            </div> <!-- Change the link to the desired next page -->
+        </div>
+    </div>
+</body>
+</html>
