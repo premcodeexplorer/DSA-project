@@ -1,1 +1,138 @@
-<h1> pretest </h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hashing Algorithm Pretest</title>
+    <link rel="stylesheet" href="../hashing.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar with navigation links -->
+        <div class="sidebar" id="sidebar">
+            <h2>Hashing Algorithm</h2>
+            <a href="../hashing.html">Home</a>
+            <a href="aim.html">Aim</a>
+            <a href="overview.html" >Overview</a>
+            <a href="recap.html">Recap</a>
+            <a href="pretest.html" class="active">Pretest</a>
+            <a href="hashingcode.html">Hashing Algorithm</a>
+            <a href="code-assessment.html">Code Assessment</a>
+            <a href="analysis.html">Analysis</a>
+            <a href="posttest.html">Posttest</a>
+            <a href="references.html">Further Readings/References</a>
+            <a href="feedback.html">Feedback</a>
+        </div>
+    <div class="container">
+        <div class="content pretest-content">
+            <h1>Hashing Algorithm Pretest</h1>
+            <form id="quiz-form">
+                <div id="questions"></div>
+                <button type="submit" class="pretest-button">Submit</button>
+            </form>
+            <button id="reset" class="pretest-button" style="display: none;">Reset</button>
+            <div id="result"></div>
+            <a href="hashingcode.html" class="btn">Next</a>
+        </div>
+        
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What is the primary purpose of a hash function?",
+                options: ["Data encryption", "Data compression", "Generating fixed-size output from variable-size input", "Sorting data"],
+                answer: 2
+            },
+            {
+                question: "Which of the following is NOT a characteristic of a good hash function?",
+                options: ["Deterministic", "Uniform distribution", "Reversible", "Efficient computation"],
+                answer: 2
+            },
+            {
+                question: "What is a hash collision?",
+                options: ["When a hash function fails to generate output", "When two different inputs produce the same hash value", "When a hash value is too long", "When a hash function is compromised"],
+                answer: 1
+            },
+            {
+                question: "Which data structure commonly uses hashing for efficient data retrieval?",
+                options: ["Linked List", "Binary Tree", "Hash Table", "Stack"],
+                answer: 2
+            },
+            {
+                question: "What is the time complexity of searching in a well-implemented hash table on average?",
+                options: ["O(1)", "O(log n)", "O(n)", "O(n^2)"],
+                answer: 0
+            },
+            {
+                question: "Which of the following is a common use of hashing in computer security?",
+                options: ["Encrypting network traffic", "Storing passwords", "Generating random numbers", "Compressing files"],
+                answer: 1
+            }
+        ];
+
+        const quizForm = document.getElementById('quiz-form');
+        const questionsContainer = document.getElementById('questions');
+        const resultDiv = document.getElementById('result');
+        const resetButton = document.getElementById('reset');
+
+        function renderQuestions() {
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `
+                    <p>${index + 1}. ${q.question}</p>
+                    ${q.options.map((option, i) => `
+                        <label>
+                            <input type="radio" name="q${index}" value="${i}" required>
+                            ${option}
+                        </label>
+                    `).join('')}
+                `;
+                questionsContainer.appendChild(questionDiv);
+            });
+        }
+
+        function calculateScore(formData) {
+            let score = 0;
+            questions.forEach((q, index) => {
+                if (parseInt(formData.get(`q${index}`)) === q.answer) {
+                    score++;
+                }
+            });
+            return score;
+        }
+
+        quizForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(quizForm);
+            const score = calculateScore(formData);
+            resultDiv.innerHTML = `
+                <h2>Your Result</h2>
+                <p>Your score: ${score} out of ${questions.length}</p>
+                <h3>Correct Answers:</h3>
+                <ol>
+                    ${questions.map((q, index) => `
+                        <li>
+                            ${q.question}<br>
+                            Correct answer: ${q.options[q.answer]}
+                        </li>
+                    `).join('')}
+                </ol>
+            `;
+            quizForm.style.display = 'none';
+            resetButton.style.display = 'block';
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        resetButton.addEventListener('click', () => {
+            quizForm.reset();
+            quizForm.style.display = 'block';
+            resetButton.style.display = 'none';
+            resultDiv.innerHTML = '';
+        });
+
+        renderQuestions();
+    </script>
+</body>
+</html>

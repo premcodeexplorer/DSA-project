@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hashing: Step-by-Step Process</title>
+    <link rel="stylesheet" href="../hashing.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Hashing Algorithm</h2>
+            <a href="../hashing.html">Home</a>
+            <a href="aim.html">Aim</a>
+            <a href="overview.html">Overview</a>
+            <a href="recap.html">Recap</a>
+            <a href="pretest.html">Pretest</a>
+            <a href="hashingcode.html" class="active">Hashing Algorithm</a>
+            <a href="code-assessment.html">Code Assessment</a>
+            <a href="analysis.html">Analysis</a>
+            <a href="posttest.html">Posttest</a>
+            <a href="references.html">Further Readings/References</a>
+            <a href="feedback.html">Feedback</a>
+        </div>
+
+        <div class="content">
+            <h1>Hashing: Step-by-Step Process</h1>
+            <p>Let's go through a detailed example of hashing using an array of size 7 (which is prime). We'll insert several elements and show each iteration of the process.</p>
+
+            <h2>What is Hashing?</h2>
+            <p>Hashing is a technique used to map large amounts of data (like keys) to a fixed-size table. The idea behind hashing is to distribute data evenly across an array to optimize search, insert, and delete operations. A <strong>hash function</strong> computes an index in the array (or hash table) for each input data. This index is used to store the data, allowing efficient retrieval later.</p>
+            
+            <p>Hashing is commonly used in data structures like <strong>hash tables</strong>, databases, and file systems. It is especially useful when you need to access data quickly, such as when searching for a specific element in a large dataset.</p>
+
+            <h3>Hash Function Example</h3>
+            <p>The performance of a hash table depends largely on the quality of the hash function. The function must ensure a uniform distribution of data to avoid excessive collisions. In this example, we use a simple hash function:</p>
+            <p>Hash function: <strong>h(k) = k mod 7</strong></p>
+            <p>By using a prime number as the hash table size, we reduce the chances of collisions by spreading out the hashed values more uniformly across the table.</p>
+
+            <h2>Collision in Hashing</h2>
+            <p>A <strong>collision</strong> occurs when two keys are hashed to the same index in the hash table. Since the table has limited size, multiple keys can map to the same index, especially when the table gets full. Collisions must be handled efficiently to maintain the performance of the hash table.</p>
+
+            <h3>Why Collisions Occur</h3>
+            <p>Collisions are inherent to the hashing process because the hash table has a finite size, but the number of potential keys is usually much larger. For example, if the table size is 7, but we try to insert more than 7 keys, some of the keys will map to the same index, resulting in collisions.</p>
+
+            <h2>Collision Resolution Techniques</h2>
+            <p>There are several techniques to handle collisions in a hash table:</p>
+
+            <h3>1. Open Addressing</h3>
+            <p>In open addressing, when a collision occurs, the algorithm searches for the next available empty slot in the hash table to store the value. The search pattern can differ based on the strategy used:</p>
+
+            <h4>a) Linear Probing</h4>
+            <p>In linear probing, if a collision happens, the algorithm checks the next slot in a sequential manner (i.e., by incrementing the index by 1 each time) until an empty slot is found.</p>
+            
+            <ul>
+                <li>For example, if <strong>h(k) = 3</strong> is already occupied, it will try <strong>h(k) = 4, 5, 6</strong>, and so on, until it finds an empty slot.</li>
+                <li>Linear probing can cause a problem known as <strong>primary clustering</strong>, where groups of occupied slots cluster together, leading to more collisions and longer search times.</li>
+                <a href="linear-probing.html" class="learn-more-btn">Learn More About Linear Probing</a>
+            </ul>
+
+            <h4>b) Quadratic Probing</h4>
+            <p>Quadratic probing resolves collisions by jumping quadratically (instead of linearly) through the hash table. The step size increases quadratically to reduce clustering.</p>
+            <ul>
+                <li>For example, if <strong>h(k) = 3</strong> is occupied, it will try the next slots by checking <strong>(3 + 1<sup>2</sup>), (3 + 2<sup>2</sup>), (3 + 3<sup>2</sup>)</strong>, and so on.</li>
+                <li>This reduces clustering but can cause <strong>secondary clustering</strong>, where keys that hash to the same initial index follow the same probe sequence.</li>
+                <a href="quadratic-probing.html" class="learn-more-btn">Learn More About Quadratic Probing</a>
+            </ul>
+
+            <h4>c) Double Hashing</h4>
+            <p>Double hashing uses a second hash function to determine the step size for probing, creating more random access to available slots and reducing clustering.</p>
+            <ul>
+                <li>If a collision occurs at <strong>h(k)</strong>, the next slot will be determined by another hash function, <strong>h<sub>2</sub>(k)</strong>, and the search continues based on this second hash function.</li>
+                <li>This is one of the most efficient methods to resolve collisions, as it minimizes both primary and secondary clustering.</li>
+                <a href="double-hashing.html" class="learn-more-btn">Learn More About Double Hashing</a>
+            </ul>
+
+            <h3>2. Separate Chaining</h3>
+            <p>Separate chaining is another common method for handling collisions. Instead of trying to find a new slot when a collision occurs, separate chaining allows multiple keys to be stored in the same slot using a linked list or another data structure.</p>
+            <ul>
+                <li>Each index in the hash table points to a linked list (or similar structure), and when a collision occurs, the key is simply added to the list at that index.</li>
+                <li>Separate chaining is simple and effective but can lead to longer search times if the linked list grows too large.</li>
+            </ul>
+
+            <h2>Insertion Process</h2>
+            <div class="step">
+                <h3>Step 1: Insert 22</h3>
+                <p class="formula"><strong>h(22) = 22 mod 7 = 1</strong></p>
+                <div class="hash-table">
+                    <div class="hash-cell"></div>
+                    <div class="hash-cell inserted">22</div>
+                    <div class="hash-cell"></div>
+                    <div class="hash-cell"></div>
+                    <div class="hash-cell"></div>
+                    <div class="hash-cell"></div>
+                    <div class="hash-cell"></div>
+                </div>
+                <p><strong>22</strong> is inserted at index <strong>1</strong></p>
+            </div>
+
+            <div class="step">
+                <h3>Step 2: Insert 41</h3>
+                <p class="formula"><strong>h(41) = 41 mod 7 = 6</strong></p>
+                <div class="hash-table">
+                    <div class="hash-cell"></div>
+                    <div class="hash-cell inserted">22</div>
+                    <div class="hash-cell"></div>
+                    <div class="hash-cell"></div>
+                    <div class="hash-cell"></div>
+                    <div class="hash-cell"></div>
+                    <div class="hash-cell inserted">41</div>
+                </div>
+                <p><strong>41</strong> is inserted at index <strong>6</strong></p>
+            </div>
+
+            <div class="step">
+                <h3>Step 3: Insert 58</h3>
+                <p class="formula"><strong>h(58) = 58 mod 7 = 2</strong></p>
+                <div class="hash-table">
+                    <div class="hash-cell"></div>
+                    <div class="hash-cell inserted">22</div>
+                    <div class="hash-cell inserted">58</div>
+                    <div class="hash-cell"></div>
+                    <div class="hash-cell"></div>
+                    <div class="hash-cell"></div>
+                    <div class="hash-cell inserted">41</div>
+                </div>
+                <p><strong>58</strong> is inserted at index <strong>2</strong></p>
+            </div>
+
+            <h2>Conclusion</h2>
+            <p>This example demonstrates how hashing works with a small prime-sized array. We used the modulo operation for hashing and linear probing to resolve collisions. In practice, more sophisticated hash functions and collision resolution techniques are used depending on the specific requirements of the application.</p>
+    
+            <a href="code-assessment.html" class="btn">Next</a>
+        </div>
+        
+    </div>
+   
+</body>
+</html>
