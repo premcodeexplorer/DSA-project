@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dijkstra's Algorithm Pretest</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        #result {
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dijkstra's Algorithm Pretest</h1>
+    <form id="quiz-form">
+        <div id="questions"></div>
+        <button type="submit">Submit</button>
+        <button type="button" id="reset">Reset</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        const questions = [
+            {
+                question: "What is the primary purpose of Dijkstra's algorithm?",
+                options: [
+                    "To find the shortest path between two nodes in a graph",
+                    "To sort an array of numbers",
+                    "To find the minimum spanning tree of a graph",
+                    "To perform matrix multiplication"
+                ],
+                answer: 0
+            },
+            {
+                question: "What type of graphs can Dijkstra's algorithm be applied to?",
+                options: [
+                    "Only undirected graphs",
+                    "Only directed graphs",
+                    "Both directed and undirected graphs with non-negative edge weights",
+                    "Graphs with negative edge weights"
+                ],
+                answer: 2
+            },
+            {
+                question: "What data structure is commonly used to implement Dijkstra's algorithm efficiently?",
+                options: [
+                    "Stack",
+                    "Queue",
+                    "Priority Queue",
+                    "Linked List"
+                ],
+                answer: 2
+            },
+            {
+                question: "What is the time complexity of Dijkstra's algorithm using a binary heap?",
+                options: [
+                    "O(V)",
+                    "O(E)",
+                    "O(V log V)",
+                    "O((V + E) log V)"
+                ],
+                answer: 3
+            },
+            {
+                question: "What is a limitation of Dijkstra's algorithm?",
+                options: [
+                    "It can only find paths between adjacent nodes",
+                    "It doesn't work on weighted graphs",
+                    "It fails on graphs with negative edge weights",
+                    "It only works on complete graphs"
+                ],
+                answer: 2
+            },
+            {
+                question: "Which algorithm is an improvement over Dijkstra's for sparse graphs?",
+                options: [
+                    "Breadth-First Search",
+                    "Depth-First Search",
+                    "A* Search",
+                    "Floyd-Warshall Algorithm"
+                ],
+                answer: 2
+            }
+        ];
+
+        function renderQuestions() {
+            const questionsContainer = document.getElementById('questions');
+            questionsContainer.innerHTML = '';
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('question');
+                questionDiv.innerHTML = `
+                    <p>${index + 1}. ${q.question}</p>
+                    ${q.options.map((option, i) => `
+                        <label>
+                            <input type="radio" name="q${index}" value="${i}">
+                            ${option}
+                        </label>
+                    `).join('<br>')}
+                `;
+                questionsContainer.appendChild(questionDiv);
+            });
+        }
+
+        function calculateScore() {
+            let score = 0;
+            questions.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                if (selected && parseInt(selected.value) === q.answer) {
+                    score++;
+                }
+            });
+            return score;
+        }
+
+        document.getElementById('quiz-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const score = calculateScore();
+            document.getElementById('result').textContent = `Your score: ${score} out of ${questions.length}`;
+        });
+
+        document.getElementById('reset').addEventListener('click', function() {
+            document.getElementById('quiz-form').reset();
+            document.getElementById('result').textContent = '';
+        });
+
+        renderQuestions();
+    </script>
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Dijkstra's Algorithm Visualization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        #container {
+            display: flex;
+            gap: 20px;
+        }
+        #graphContainer {
+            text-align: center;
+        }
+        #graph {
+            width: 600px;
+            height: 400px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+        #controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        button, select {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #infoPanel {
+            width: 300px;
+            height: 400px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            overflow-y: auto;
+            background-color: white;
+        }
+        #stepInfo {
+            margin-bottom: 10px;
+        }
+        .node {
+            fill: white;
+            stroke: black;
+            cursor: pointer;
+        }
+        .node-text {
+            font-size: 12px;
+            text-anchor: middle;
+            dominant-baseline: central;
+            pointer-events: none;
+        }
+        .edge {
+            stroke: #999;
+        }
+        .edge-weight {
+            font-size: 10px;
+            text-anchor: middle;
+        }
+        .visited {
+            fill: #90EE90;
+        }
+        .current {
+            fill: #FFD700;
+        }
+        .start {
+            fill: #32CD32;
+        }
+        .end {
+            fill: #FF4500;
+        }
+        .shortest-path {
+            stroke: #32CD32;
+            stroke-width: 3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interactive Dijkstra's Algorithm Visualization</h1>
+    <div id="container">
+        <div id="graphContainer">
+            <svg id="graph"></svg>
+            <div id="controls">
+                <select id="startNode"></select>
+                <select id="endNode"></select>
+                <button id="startButton">Start Algorithm</button>
+                <button id="stepButton" disabled>Step</button>
+                <button id="resetButton">Reset</button>
+            </div>
+        </div>
+        <div id="infoPanel">
+            <h3>Algorithm Progress</h3>
+            <div id="stepInfo"></div>
+            <h3>Distances</h3>
+            <div id="distances"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <script>
+        const svg = d3.select('#graph');
+        const width = 600;
+        const height = 400;
+        svg.attr('width', width).attr('height', height);
+
+        const nodes = [
+            { id: 'A', x: 50, y: 50 },
+            { id: 'B', x: 200, y: 50 },
+            { id: 'C', x: 350, y: 50 },
+            { id: 'D', x: 50, y: 200 },
+            { id: 'E', x: 200, y: 200 },
+            { id: 'F', x: 350, y: 200 },
+            { id: 'G', x: 500, y: 200 },
+            { id: 'H', x: 50, y: 350 },
+            { id: 'I', x: 200, y: 350 },
+            { id: 'J', x: 350, y: 350 },
+        ];
+
+        const edges = [
+            { source: 'A', target: 'B', weight: 4 },
+            { source: 'A', target: 'D', weight: 2 },
+            { source: 'B', target: 'C', weight: 3 },
+            { source: 'B', target: 'E', weight: 3 },
+            { source: 'C', target: 'F', weight: 2 },
+            { source: 'D', target: 'E', weight: 3 },
+            { source: 'D', target: 'H', weight: 4 },
+            { source: 'E', target: 'F', weight: 1 },
+            { source: 'E', target: 'I', weight: 2 },
+            { source: 'F', target: 'G', weight: 2 },
+            { source: 'F', target: 'J', weight: 3 },
+            { source: 'G', target: 'J', weight: 1 },
+            { source: 'H', target: 'I', weight: 2 },
+            { source: 'I', target: 'J', weight: 5 },
+        ];
+
+        let startNodeId = 'A';
+        let endNodeId = 'J';
+
+        function drawGraph() {
+            svg.selectAll('*').remove();
+
+            svg.selectAll('line')
+                .data(edges)
+                .enter()
+                .append('line')
+                .attr('class', 'edge')
+                .attr('x1', d => nodes.find(n => n.id === d.source).x)
+                .attr('y1', d => nodes.find(n => n.id === d.source).y)
+                .attr('x2', d => nodes.find(n => n.id === d.target).x)
+                .attr('y2', d => nodes.find(n => n.id === d.target).y);
+
+            svg.selectAll('text.edge-weight')
+                .data(edges)
+                .enter()
+                .append('text')
+                .attr('class', 'edge-weight')
+                .attr('x', d => (nodes.find(n => n.id === d.source).x + nodes.find(n => n.id === d.target).x) / 2)
+                .attr('y', d => (nodes.find(n => n.id === d.source).y + nodes.find(n => n.id === d.target).y) / 2)
+                .text(d => d.weight);
+
+            svg.selectAll('circle')
+                .data(nodes)
+                .enter()
+                .append('circle')
+                .attr('class', d => {
+                    if (d.id === startNodeId) return 'node start';
+                    if (d.id === endNodeId) return 'node end';
+                    return 'node';
+                })
+                .attr('cx', d => d.x)
+                .attr('cy', d => d.y)
+                .attr('r', 20);
+
+            svg.selectAll('text.node-text')
+                .data(nodes)
+                .enter()
+                .append('text')
+                .attr('class', 'node-text')
+                .attr('x', d => d.x)
+                .attr('y', d => d.y)
+                .text(d => d.id);
+        }
+
+        let distances, previous, unvisited, currentNode;
+        let algorithmSteps = [];
+        let stepIndex = 0;
+
+        function initializeDijkstra(startNode) {
+            distances = {};
+            previous = {};
+            unvisited = new Set(nodes.map(n => n.id));
+
+            nodes.forEach(node => {
+                distances[node.id] = Infinity;
+                previous[node.id] = null;
+            });
+
+            distances[startNode] = 0;
+            currentNode = startNode;
+            algorithmSteps = [];
+            stepIndex = 0;
+        }
+
+        function getMinDistanceNode() {
+            return Array.from(unvisited).reduce((minNode, node) => 
+                distances[node] < distances[minNode] ? node : minNode
+            );
+        }
+
+        function dijkstraStep() {
+            if (unvisited.size === 0 || currentNode === endNodeId) return false;
+
+            currentNode = getMinDistanceNode();
+            unvisited.delete(currentNode);
+
+            const neighbors = edges.filter(e => e.source === currentNode || e.target === currentNode);
+
+            for (const edge of neighbors) {
+                const neighborId = edge.source === currentNode ? edge.target : edge.source;
+                if (!unvisited.has(neighborId)) continue;
+
+                const newDistance = distances[currentNode] + edge.weight;
+
+                if (newDistance < distances[neighborId]) {
+                    distances[neighborId] = newDistance;
+                    previous[neighborId] = currentNode;
+                }
+            }
+
+            algorithmSteps.push({
+                currentNode,
+                distances: {...distances},
+                previous: {...previous},
+                unvisited: new Set(unvisited)
+            });
+
+            return true;
+        }
+
+        function updateVisualization() {
+            const step = algorithmSteps[stepIndex];
+
+            svg.selectAll('.node')
+                .attr('class', d => {
+                    if (d.id === startNodeId) return 'node start';
+                    if (d.id === endNodeId) return 'node end';
+                    if (d.id === step.currentNode) return 'node current';
+                    if (!step.unvisited.has(d.id)) return 'node visited';
+                    return 'node';
+                });
+
+            let path = [];
+            let current = endNodeId;
+            while (current !== null) {
+                path.unshift(current);
+                current = step.previous[current];
+            }
+
+            svg.selectAll('.edge')
+                .attr('class', d => {
+                    if (path.includes(d.source) && path.includes(d.target) &&
+                        Math.abs(path.indexOf(d.source) - path.indexOf(d.target)) === 1) {
+                        return 'edge shortest-path';
+                    }
+                    return 'edge';
+                });
+
+            updateInfoPanel(step, path);
+        }
+
+        function updateInfoPanel(step, path) {
+            const stepInfo = document.getElementById('stepInfo');
+            const distancesInfo = document.getElementById('distances');
+
+            stepInfo.innerHTML = `
+                <p>Start node: ${startNodeId}</p>
+                <p>End node: ${endNodeId}</p>
+                <p>Current node: ${step.currentNode}</p>
+                <p>Unvisited nodes: ${Array.from(step.unvisited).join(', ')}</p>
+                <p>Shortest path: ${path.join(' → ')}</p>
+                <p>Path length: ${distances[endNodeId]}</p>
+            `;
+
+            distancesInfo.innerHTML = Object.entries(step.distances)
+                .map(([node, distance]) => `<p>${node}: ${distance === Infinity ? '∞' : distance}</p>`)
+                .join('');
+        }
+
+        const startNodeSelect = document.getElementById('startNode');
+        const endNodeSelect = document.getElementById('endNode');
+        const startButton = document.getElementById('startButton');
+        const stepButton = document.getElementById('stepButton');
+        const resetButton = document.getElementById('resetButton');
+
+        nodes.forEach(node => {
+            const startOption = document.createElement('option');
+            startOption.value = node.id;
+            startOption.textContent = node.id;
+            startNodeSelect.appendChild(startOption);
+
+            const endOption = document.createElement('option');
+            endOption.value = node.id;
+            endOption.textContent = node.id;
+            endNodeSelect.appendChild(endOption);
+        });
+
+        startNodeSelect.value = startNodeId;
+        endNodeSelect.value = endNodeId;
+
+        startNodeSelect.addEventListener('change', (e) => {
+            startNodeId = e.target.value;
+            drawGraph();
+        });
+
+        endNodeSelect.addEventListener('change', (e) => {
+            endNodeId = e.target.value;
+            drawGraph();
+        });
+
+        startButton.addEventListener('click', () => {
+            initializeDijkstra(startNodeId);
+            while (dijkstraStep()) {}
+            updateVisualization();
+            startButton.disabled = true;
+            stepButton.disabled = false;
+        });
+
+        stepButton.addEventListener('click', () => {
+            if (stepIndex < algorithmSteps.length - 1) {
+                stepIndex++;
+                updateVisualization();
+            } else {
+                stepButton.disabled = true;
+            }
+        });
+
+        resetButton.addEventListener('click', () => {
+            drawGraph();
+            document.getElementById('stepInfo').innerHTML = '';
+            document.getElementById('distances').innerHTML = '';
+            startButton.disabled = false;
+            stepButton.disabled = true;
+        });
+
+        drawGraph();
+    </script>
+</body>
+</html>
