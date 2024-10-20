@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linear Probing - Detailed Explanation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .back-btn {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px 0;
+            transition: background-color 0.3s;
+        }
+        .back-btn:hover {
+            background-color: #0056b3;
+        }
+        .hash-table {
+            display: flex;
+            margin: 20px 0;
+            gap: 10px;
+        }
+        .hash-cell {
+            width: 60px;
+            height: 60px;
+            border: 2px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            background-color: white;
+            position: relative;
+        }
+        .hash-cell.inserted {
+            background-color: #e3f2fd;
+            border-color: #2196f3;
+        }
+        .hash-cell.collision {
+            background-color: #ffebee;
+            border-color: #f44336;
+        }
+        .hash-cell.probed {
+            background-color: #fff3e0;
+            border-color: #ff9800;
+        }
+        .index {
+            position: absolute;
+            top: -25px;
+            font-size: 14px;
+            color: #666;
+        }
+        .step {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        .formula {
+            background-color: #e3f2fd;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="hashingcode.html" class="back-btn">← Back to Hashing Overview</a>
+        
+        <h1>Linear Probing: In-Depth Explanation</h1>
+        
+        <h2>What is Linear Probing?</h2>
+        <p>Linear probing is a collision resolution technique used in hash tables where, if a collision occurs at position h(k), we sequentially check positions h(k)+1, h(k)+2, h(k)+3, and so on, until we find an empty slot.</p>
+        
+        <h3>Key Characteristics:</h3>
+        <ul>
+            <li><strong>Sequence:</strong> Probing is done in a linear sequence</li>
+            <li><strong>Formula:</strong> h(k, i) = (h(k) + i) mod m, where:
+                <ul>
+                    <li>h(k) is the initial hash value</li>
+                    <li>i is the probe number (0, 1, 2, ...)</li>
+                    <li>m is the table size</li>
+                </ul>
+            </li>
+            <li><strong>Primary Clustering:</strong> Tends to create clusters of occupied slots</li>
+        </ul>
+
+        <h2>Step-by-Step Example</h2>
+        <p>Let's insert the following keys into a hash table of size 7 using linear probing:</p>
+        <p class="formula">Keys to insert: 22, 41, 58, 29, 16</p>
+        <p class="formula">Hash function: h(k) = k mod 7</p>
+
+        <div class="step">
+            <h3>Initial Empty Table</h3>
+            <div class="hash-table">
+                <div class="hash-cell"><span class="index">0</span></div>
+                <div class="hash-cell"><span class="index">1</span></div>
+                <div class="hash-cell"><span class="index">2</span></div>
+                <div class="hash-cell"><span class="index">3</span></div>
+                <div class="hash-cell"><span class="index">4</span></div>
+                <div class="hash-cell"><span class="index">5</span></div>
+                <div class="hash-cell"><span class="index">6</span></div>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Step 1: Insert 22</h3>
+            <p class="formula">h(22) = 22 mod 7 = 1</p>
+            <div class="hash-table">
+                <div class="hash-cell"><span class="index">0</span></div>
+                <div class="hash-cell inserted">22<span class="index">1</span></div>
+                <div class="hash-cell"><span class="index">2</span></div>
+                <div class="hash-cell"><span class="index">3</span></div>
+                <div class="hash-cell"><span class="index">4</span></div>
+                <div class="hash-cell"><span class="index">5</span></div>
+                <div class="hash-cell"><span class="index">6</span></div>
+            </div>
+            <p>22 is inserted directly at index 1</p>
+        </div>
+
+        <div class="step">
+            <h3>Step 2: Insert 41</h3>
+            <p class="formula">h(41) = 41 mod 7 = 6</p>
+            <div class="hash-table">
+                <div class="hash-cell"><span class="index">0</span></div>
+                <div class="hash-cell inserted">22<span class="index">1</span></div>
+                <div class="hash-cell"><span class="index">2</span></div>
+                <div class="hash-cell"><span class="index">3</span></div>
+                <div class="hash-cell"><span class="index">4</span></div>
+                <div class="hash-cell"><span class="index">5</span></div>
+                <div class="hash-cell inserted">41<span class="index">6</span></div>
+            </div>
+            <p>41 is inserted directly at index 6</p>
+        </div>
+
+        <div class="step">
+            <h3>Step 3: Insert 58</h3>
+            <p class="formula">h(58) = 58 mod 7 = 2</p>
+            <div class="hash-table">
+                <div class="hash-cell"><span class="index">0</span></div>
+                <div class="hash-cell inserted">22<span class="index">1</span></div>
+                <div class="hash-cell inserted">58<span class="index">2</span></div>
+                <div class="hash-cell"><span class="index">3</span></div>
+                <div class="hash-cell"><span class="index">4</span></div>
+                <div class="hash-cell"><span class="index">5</span></div>
+                <div class="hash-cell inserted">41<span class="index">6</span></div>
+            </div>
+            <p>58 is inserted directly at index 2</p>
+        </div>
+
+        <div class="step">
+            <h3>Step 4: Insert 29</h3>
+            <p class="formula">h(29) = 29 mod 7 = 1</p>
+            <p class="formula">Collision at index 1! Using linear probing...</p>
+            <div class="hash-table">
+                <div class="hash-cell"><span class="index">0</span></div>
+                <div class="hash-cell collision">22<span class="index">1</span></div>
+                <div class="hash-cell inserted">58<span class="index">2</span></div>
+                <div class="hash-cell inserted">29<span class="index">3</span></div>
+                <div class="hash-cell"><span class="index">4</span></div>
+                <div class="hash-cell"><span class="index">5</span></div>
+                <div class="hash-cell inserted">41<span class="index">6</span></div>
+            </div>
+            <p>29 had a collision at index 1, probed to index 2 (occupied), finally inserted at index 3</p>
+        </div>
+
+        <div class="step">
+            <h3>Step 5: Insert 16</h3>
+            <p class="formula">h(16) = 16 mod 7 = 2</p>
+            <p class="formula">Collision at index 2! Using linear probing...</p>
+            <div class="hash-table">
+                <div class="hash-cell"><span class="index">0</span></div>
+                <div class="hash-cell collision">22<span class="index">1</span></div>
+                <div class="hash-cell collision">58<span class="index">2</span></div>
+                <div class="hash-cell collision">29<span class="index">3</span></div>
+                <div class="hash-cell inserted">16<span class="index">4</span></div>
+                <div class="hash-cell"><span class="index">5</span></div>
+                <div class="hash-cell inserted">41<span class="index">6</span></div>
+            </div>
+            <p>16 had a collision at index 2, probed through indices 2 and 3 (occupied), finally inserted at index 4</p>
+        </div>
+
+        <h2>Advantages and Disadvantages</h2>
+        <h3>Advantages:</h3>
+        <ul>
+            <li>Simple to implement</li>
+            <li>Good cache performance due to sequential memory access</li>
+            <li>Works well with low load factors</li>
+        </ul>
+
+        <h3>Disadvantages:</h3>
+        <ul>
+            <li>Suffers from primary clustering</li>
+            <li>Performance degrades as table fills up</li>
+            <li>Clusters grow larger over time</li>
+        </ul>
+
+        <a href="hashingcode.html" class="back-btn">← Back to Hashing Overview</a>
+    </div>
+</body>
+</html>

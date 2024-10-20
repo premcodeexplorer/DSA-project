@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadratic Probing - Detailed Explanation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #353434;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .back-btn {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px 0;
+            transition: background-color 0.3s;
+        }
+        .back-btn:hover {
+            background-color: #0056b3;
+        }
+        .hash-table {
+            display: flex;
+            margin: 20px 0;
+            gap: 10px;
+        }
+        .hash-cell {
+            width: 60px;
+            height: 60px;
+            border: 2px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            background-color: white;
+            position: relative;
+        }
+        .hash-cell.inserted {
+            background-color: #e3f2fd;
+            border-color: #2196f3;
+        }
+        .hash-cell.collision {
+            background-color: #ffebee;
+            border-color: #f44336;
+        }
+        .hash-cell.probed {
+            background-color: #fff3e0;
+            border-color: #ff9800;
+        }
+        .index {
+            position: absolute;
+            top: -25px;
+            font-size: 14px;
+            color: #666;
+        }
+        .step {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #4caf50;
+        }
+        .formula {
+            background-color: #e8f5e9;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+        .probe-sequence {
+            background-color: #fff3e0;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="hashingcode.html" class="back-btn">← Back to Hashing Overview</a>
+        
+        <h1>Quadratic Probing: In-Depth Explanation</h1>
+        
+        <h2>What is Quadratic Probing?</h2>
+        <p>Quadratic probing is a collision resolution technique that uses quadratic polynomial probing. When a collision occurs, instead of checking consecutive slots, it checks slots at quadratic intervals.</p>
+        
+        <h3>Key Characteristics:</h3>
+        <ul>
+            <li><strong>Probe Sequence:</strong> When collision occurs at position h(k), try positions:
+                <ul>
+                    <li>h(k) + 1² mod m</li>
+                    <li>h(k) + 2² mod m</li>
+                    <li>h(k) + 3² mod m</li>
+                    <li>And so on...</li>
+                </ul>
+            </li>
+            <li><strong>Formula:</strong> h'(k) = (h(k) + i²) mod m
+                <ul>
+                    <li>where i is the probe number (1, 2, 3, ...)</li>
+                    <li>m is the table size</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h2>Step-by-Step Example</h2>
+        <p>Let's insert the following keys into a hash table of size 7:</p>
+        <p class="formula">Keys to insert: 22, 41, 58, 29, 16</p>
+        <p class="formula">Hash function: h(k) = k mod 7</p>
+
+        <div class="step">
+            <h3>Initial Empty Table</h3>
+            <div class="hash-table">
+                <div class="hash-cell"><span class="index">0</span></div>
+                <div class="hash-cell"><span class="index">1</span></div>
+                <div class="hash-cell"><span class="index">2</span></div>
+                <div class="hash-cell"><span class="index">3</span></div>
+                <div class="hash-cell"><span class="index">4</span></div>
+                <div class="hash-cell"><span class="index">5</span></div>
+                <div class="hash-cell"><span class="index">6</span></div>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Step 1: Insert 22</h3>
+            <p class="formula">h(22) = 22 mod 7 = 1</p>
+            <div class="hash-table">
+                <div class="hash-cell"><span class="index">0</span></div>
+                <div class="hash-cell inserted">22<span class="index">1</span></div>
+                <div class="hash-cell"><span class="index">2</span></div>
+                <div class="hash-cell"><span class="index">3</span></div>
+                <div class="hash-cell"><span class="index">4</span></div>
+                <div class="hash-cell"><span class="index">5</span></div>
+                <div class="hash-cell"><span class="index">6</span></div>
+            </div>
+            <p>22 is inserted directly at index 1 (no collision)</p>
+        </div>
+
+        <div class="step">
+            <h3>Step 2: Insert 41</h3>
+            <p class="formula">h(41) = 41 mod 7 = 6</p>
+            <div class="hash-table">
+                <div class="hash-cell"><span class="index">0</span></div>
+                <div class="hash-cell inserted">22<span class="index">1</span></div>
+                <div class="hash-cell"><span class="index">2</span></div>
+                <div class="hash-cell"><span class="index">3</span></div>
+                <div class="hash-cell"><span class="index">4</span></div>
+                <div class="hash-cell"><span class="index">5</span></div>
+                <div class="hash-cell inserted">41<span class="index">6</span></div>
+            </div>
+            <p>41 is inserted directly at index 6 (no collision)</p>
+        </div>
+
+        <div class="step">
+            <h3>Step 3: Insert 58</h3>
+            <p class="formula">h(58) = 58 mod 7 = 2</p>
+            <div class="hash-table">
+                <div class="hash-cell"><span class="index">0</span></div>
+                <div class="hash-cell inserted">22<span class="index">1</span></div>
+                <div class="hash-cell inserted">58<span class="index">2</span></div>
+                <div class="hash-cell"><span class="index">3</span></div>
+                <div class="hash-cell"><span class="index">4</span></div>
+                <div class="hash-cell"><span class="index">5</span></div>
+                <div class="hash-cell inserted">41<span class="index">6</span></div>
+            </div>
+            <p>58 is inserted directly at index 2 (no collision)</p>
+        </div>
+
+        <div class="step">
+            <h3>Step 4: Insert 29</h3>
+            <p class="formula">h(29) = 29 mod 7 = 1</p>
+            <p class="formula">Collision at index 1!</p>
+            <div class="probe-sequence">
+                Quadratic probe sequence:
+                <br>Try 1: (1 + 1²) mod 7 = 2 (occupied)
+                <br>Try 2: (1 + 2²) mod 7 = 5 (empty!)
+            </div>
+            <div class="hash-table">
+                <div class="hash-cell"><span class="index">0</span></div>
+                <div class="hash-cell collision">22<span class="index">1</span></div>
+                <div class="hash-cell collision">58<span class="index">2</span></div>
+                <div class="hash-cell"><span class="index">3</span></div>
+                <div class="hash-cell"><span class="index">4</span></div>
+                <div class="hash-cell inserted">29<span class="index">5</span></div>
+                <div class="hash-cell inserted">41<span class="index">6</span></div>
+            </div>
+            <p>29 had a collision at index 1, quadratic probing found empty slot at index 5</p>
+        </div>
+
+        <div class="step">
+            <h3>Step 5: Insert 16</h3>
+            <p class="formula">h(16) = 16 mod 7 = 2</p>
+            <p class="formula">Collision at index 2!</p>
+            <div class="probe-sequence">
+                Quadratic probe sequence:
+                <br>Try 1: (2 + 1²) mod 7 = 3 (empty!)
+            </div>
+            <div class="hash-table">
+                <div class="hash-cell"><span class="index">0</span></div>
+                <div class="hash-cell inserted">22<span class="index">1</span></div>
+                <div class="hash-cell collision">58<span class="index">2</span></div>
+                <div class="hash-cell inserted">16<span class="index">3</span></div>
+                <div class="hash-cell"><span class="index">4</span></div>
+                <div class="hash-cell inserted">29<span class="index">5</span></div>
+                <div class="hash-cell inserted">41<span class="index">6</span></div>
+            </div>
+            <p>16 had a collision at index 2, quadratic probing found empty slot at index 3</p>
+        </div>
+
+        <h2>Comparison with Linear Probing</h2>
+        <ul>
+            <li><strong>Better clustering behavior:</strong> Quadratic probing helps avoid the primary clustering that occurs with linear probing</li>
+            <li><strong>Jump sequence:</strong> Instead of checking consecutive locations, it jumps quadratically (1, 4, 9, 16, ...) slots away</li>
+            <li><strong>Secondary clustering:</strong> Keys that hash to the same initial position will follow the same probe sequence</li>
+        </ul>
+
+        <h2>Advantages and Disadvantages</h2>
+        <h3>Advantages:</h3>
+        <ul>
+            <li>Reduces primary clustering compared to linear probing</li>
+            <li>Better performance than linear probing for medium-load factors</li>
+            <li>Simple to implement</li>
+        </ul>
+
+        <h3>Disadvantages:</h3>
+        <ul>
+            <li>May not probe all table positions when table size is not prime</li>
+            <li>Can suffer from secondary clustering</li>
+            <li>Less cache-friendly than linear probing due to non-sequential probing</li>
+        </ul>
+
+        <a href="hashingcode.html" class="back-btn">← Back to Hashing Overview</a>
+    </div>
+</body>
+</html>
