@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Linear Probing - Detailed Explanation</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -22,7 +23,7 @@
         }
         .back-btn {
             display: inline-block;
-            background-color: #007bff;
+            background-color: #28a745; /* Green background */
             color: white;
             padding: 10px 20px;
             text-decoration: none;
@@ -31,7 +32,7 @@
             transition: background-color 0.3s;
         }
         .back-btn:hover {
-            background-color: #0056b3;
+            background-color: #218838; /* Darker green on hover */
         }
         .hash-table {
             display: flex;
@@ -50,16 +51,16 @@
             position: relative;
         }
         .hash-cell.inserted {
-            background-color: #e3f2fd;
-            border-color: #2196f3;
+            background-color: #d4edda; /* Light green for inserted cells */
+            border-color: #155724; /* Dark green border */
         }
         .hash-cell.collision {
-            background-color: #ffebee;
-            border-color: #f44336;
+            background-color: #f8d7da; /* Light red for collision */
+            border-color: #721c24; /* Dark red border */
         }
         .hash-cell.probed {
-            background-color: #fff3e0;
-            border-color: #ff9800;
+            background-color: #fff3e0; /* Orange for probed cells */
+            border-color: #ff9800; /* Orange border */
         }
         .index {
             position: absolute;
@@ -72,10 +73,10 @@
             padding: 20px;
             background-color: #f8f9fa;
             border-radius: 8px;
-            border-left: 4px solid #007bff;
+            border-left: 4px solid #28a745; /* Green left border */
         }
         .formula {
-            background-color: #e3f2fd;
+            background-color: #d4edda; /* Light green for formulas */
             padding: 10px;
             border-radius: 4px;
             font-family: monospace;
@@ -89,7 +90,7 @@
         <h1>Linear Probing: In-Depth Explanation</h1>
         
         <h2>What is Linear Probing?</h2>
-        <p>Linear probing is a collision resolution technique used in hash tables where, if a collision occurs at position h(k), we sequentially check positions h(k)+1, h(k)+2, h(k)+3, and so on, until we find an empty slot.</p>
+        <p>Linear probing is a collision resolution technique used in hash tables. When a collision occurs at a hash position, it sequentially checks subsequent positions until it finds an empty slot. This method helps maintain efficient access times, but it can lead to clustering, which can degrade performance.</p>
         
         <h3>Key Characteristics:</h3>
         <ul>
@@ -191,30 +192,24 @@
                 <div class="hash-cell"><span class="index">0</span></div>
                 <div class="hash-cell collision">22<span class="index">1</span></div>
                 <div class="hash-cell collision">58<span class="index">2</span></div>
-                <div class="hash-cell collision">29<span class="index">3</span></div>
+                <div class="hash-cell inserted">29<span class="index">3</span></div>
                 <div class="hash-cell inserted">16<span class="index">4</span></div>
                 <div class="hash-cell"><span class="index">5</span></div>
                 <div class="hash-cell inserted">41<span class="index">6</span></div>
             </div>
-            <p>16 had a collision at index 2, probed through indices 2 and 3 (occupied), finally inserted at index 4</p>
+            <p>16 had a collision at index 2, probed to index 3 (occupied), finally inserted at index 4</p>
         </div>
 
-        <h2>Advantages and Disadvantages</h2>
-        <h3>Advantages:</h3>
-        <ul>
-            <li>Simple to implement</li>
-            <li>Good cache performance due to sequential memory access</li>
-            <li>Works well with low load factors</li>
-        </ul>
-
-        <h3>Disadvantages:</h3>
-        <ul>
-            <li>Suffers from primary clustering</li>
-            <li>Performance degrades as table fills up</li>
-            <li>Clusters grow larger over time</li>
-        </ul>
-
-        <a href="hashingcode.html" class="back-btn">← Back to Hashing Overview</a>
+        <h2>Final Hash Table</h2>
+        <div class="hash-table">
+            <div class="hash-cell"><span class="index">0</span></div>
+            <div class="hash-cell collision">22<span class="index">1</span></div>
+            <div class="hash-cell collision">58<span class="index">2</span></div>
+            <div class="hash-cell inserted">29<span class="index">3</span></div>
+            <div class="hash-cell inserted">16<span class="index">4</span></div>
+            <div class="hash-cell"><span class="index">5</span></div>
+            <div class="hash-cell inserted">41<span class="index">6</span></div>
+        </div>
     </div>
 </body>
 </html>
