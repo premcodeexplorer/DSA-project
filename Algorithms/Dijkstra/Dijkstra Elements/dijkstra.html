@@ -3,9 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dijkstra's Algorithm: Step-by-Step Process</title>
+    <link rel="stylesheet" href="../dijkstra.css">
 </head>
 <body>
-    
+    <div class="container">
+        <!-- Sidebar with navigation links -->
+        <div class="sidebar" id="sidebar">
+            <h2>Dijkstra's Algorithm</h2>
+            <a href="home.html">Home</a>
+            <a href="aim.html">Aim</a>
+            <a href="overview.html">Overview</a>
+            <a href="pretest.html">Pretest</a>
+            <a href="dijkstra.html" class="active">Dijkstra's Algorithm</a>
+            <a href="visual.html">Visualizer</a>
+            <a href="analysis.html">Analysis</a>
+            <a href="posttest.html">Posttest</a>
+            <a href="Further Readings/References"></a>
+            <a href="feedback.html">Feedback</a>
+        </div>
+
+        <div class="content">
+            <h1>Dijkstra's Algorithm: Step-by-Step Process</h1>
+
+            <h2>What is Dijkstra's Algorithm?</h2>
+            <p>Dijkstra's algorithm is used to find the shortest path from a single source node to all other nodes in a weighted graph. It is commonly used in network routing and mapping applications where you need to determine the shortest route between two points.</p>
+
+            <h2>How the Algorithm Works</h2>
+            <p>Dijkstra's algorithm works by maintaining a set of nodes whose shortest distance from the source node is known. It iteratively selects the node with the smallest tentative distance, explores its neighbors, and updates their distances if a shorter path is found.</p>
+
+            <h2>Algorithm Example</h2>
+            <p>Let's go through a simple example using a graph with 6 nodes and the following edges:</p>
+
+            <ul>
+                <li>A - B (4)</li>
+                <li>A - C (2)</li>
+                <li>B - C (5)</li>
+                <li>B - D (10)</li>
+                <li>C - E (3)</li>
+                <li>D - F (11)</li>
+                <li>E - D (4)</li>
+            </ul>
+
+            <h3>Step 1:</h3>
+            <p>Start from Node 0 and mark Node as visited as you can check in below image visited Node is marked red. </p>
+
+            <div class="step-visualization">
+                <p>Graph after initialization:</p>
+                <img src="step1.png" alt="Step 1 Visualization">
+            </div>
+
+            <h3>Step 2: </h3>
+            <p>Check for adjacent Nodes, Now we have to choices (Either choose Node1 with distance 2 or either choose Node 2 with distance 6 ) and choose Node with minimum distance. In this step Node 1 is Minimum distance adjacent Node, so marked it as visited and add up the distance.</p>
+
+            <div class="step-visualization">
+               
+                <img src="step2.png" alt="Step 2 Visualization">
+            </div>
+
+            <h3>Step 3:</h3>
+            <p>Then Move Forward and check for adjacent Node which is Node 3, so marked it as visited and add up the distance, Now the distance will be:</p>
+
+            <div class="step-visualization">
+               
+                <img src="step3.jpg" alt="Step 3 Visualization">
+            </div>
+
+            <h3>Step 4:</h3>
+            <p>Again we have two choices for adjacent Nodes (Either we can choose Node 4 with distance 10 or either we can choose Node 5 with distance 15) so choose Node with minimum distance. In this step Node 4 is Minimum distance adjacent Node, so marked it as visited and add up the distance. </p>
+
+            <div class="step-visualization">
+                
+                <img src="step4.png" alt="Step 3 Visualization">
+            </div>
+
+            <h3>Step 5:</h3>
+            <p>Again, Move Forward and check for adjacent Node which is Node 6, so marked it as visited and add up the distance, Now the distance will be:</p>
+
+            <div class="step-visualization">
+                
+                <img src="step5.png" alt="Step 3 Visualization">
+            </div>
+
+            
+
+            <h2>Conclusion</h2>
+            <p>By following these steps, Dijkstra's algorithm determines the shortest path from the source node to all other nodes in the graph. It is efficient for graphs without negative weights.</p>
+
+            <a href="visual.html" class="btn">Next</a>
+        </div>
+    </div>
 </body>
 </html>
