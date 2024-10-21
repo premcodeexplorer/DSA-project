@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Sort Algorithm Pretest</title>
+    <link rel="stylesheet" href="../quicksort.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar with navigation links -->
+        <div class="sidebar" id="sidebar">
+            <a href="../quicksort.html">Home</a>
+            <a href="aim.html" class="active">Aim</a>
+            <a href="overview.html">Overview</a>
+            <a href="visualizer.html">Animation</a>
+            <a href="recap.html">Recap</a>
+            <a href="pretest.html">Pre-test</a>
+            <a href="quicksortcode.html">Quick Sort Algorithm</a>
+            <a href="analysis.html">Analysis</a>
+            <a href="posttest.html">Post-test</a>
+            <a href="references.html">Further Readings/References</a>
+            <a href="feedback.html">Feedback</a>
+        </div>
+        <div class="content pretest-content">
+            <h1>Quick Sort Algorithm Pretest</h1>
+            <form id="quiz-form">
+                <div id="questions"></div>
+                <button type="submit" class="pretest-button">Submit</button>
+            </form>
+            <button id="reset" class="pretest-button" style="display: none;">Reset</button>
+            <div id="result"></div>
+            <a href="quicksortcode.html" class="btn">Next</a>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What is the primary strategy used by Quick Sort?",
+                options: ["Divide and conquer", "Dynamic programming", "Greedy approach", "Backtracking"],
+                answer: 0
+            },
+            {
+                question: "What is the average time complexity of Quick Sort?",
+                options: ["O(n log n)", "O(n^2)", "O(log n)", "O(n)"],
+                answer: 0
+            },
+            {
+                question: "Which of the following is a common method for selecting a pivot in Quick Sort?",
+                options: ["First element", "Last element", "Median", "All of the above"],
+                answer: 3
+            },
+            {
+                question: "What is a disadvantage of Quick Sort?",
+                options: ["It is unstable", "It requires additional memory", "It is always the fastest sorting algorithm", "It cannot handle large datasets"],
+                answer: 0
+            },
+            {
+                question: "Which of the following best describes Quick Sort's space complexity?",
+                options: ["O(n)", "O(log n)", "O(1)", "O(n log n)"],
+                answer: 1
+            },
+            {
+                question: "In the worst case, what is the time complexity of Quick Sort?",
+                options: ["O(n log n)", "O(n^2)", "O(log n)", "O(n)"],
+                answer: 1
+            }
+        ];
+
+        const quizForm = document.getElementById('quiz-form');
+        const questionsContainer = document.getElementById('questions');
+        const resultDiv = document.getElementById('result');
+        const resetButton = document.getElementById('reset');
+
+        function renderQuestions() {
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `
+                    <p>${index + 1}. ${q.question}</p>
+                    ${q.options.map((option, i) => `
+                        <label>
+                            <input type="radio" name="q${index}" value="${i}" required>
+                            ${option}
+                        </label>
+                    `).join('')}
+                `;
+                questionsContainer.appendChild(questionDiv);
+            });
+        }
+
+        function calculateScore(formData) {
+            let score = 0;
+            questions.forEach((q, index) => {
+                if (parseInt(formData.get(`q${index}`)) === q.answer) {
+                    score++;
+                }
+            });
+            return score;
+        }
+
+        quizForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(quizForm);
+            const score = calculateScore(formData);
+            resultDiv.innerHTML = `
+                <h2>Your Result</h2>
+                <p>Your score: ${score} out of ${questions.length}</p>
+                <h3>Correct Answers:</h3>
+                <ol>
+                    ${questions.map((q, index) => `
+                        <li>
+                            ${q.question}<br>
+                            Correct answer: ${q.options[q.answer]}
+                        </li>
+                    `).join('')}
+                </ol>
+            `;
+            quizForm.style.display = 'none';
+            resetButton.style.display = 'block';
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        resetButton.addEventListener('click', () => {
+            quizForm.reset();
+            quizForm.style.display = 'block';
+            resetButton.style.display = 'none';
+            resultDiv.innerHTML = '';
+        });
+
+        renderQuestions();
+    </script>
+</body>
+</html>

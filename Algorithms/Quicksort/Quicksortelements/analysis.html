@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Sort Algorithm - Analysis</title>
+    <link rel="stylesheet" href="../quicksort.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar with navigation links -->
+        <div class="sidebar" id="sidebar">
+            <a href="../quicksort.html">Home</a>
+            <a href="aim.html" class="active">Aim</a>
+            <a href="overview.html">Overview</a>
+            <a href="visualizer.html">Animation</a>
+            <a href="recap.html">Recap</a>
+            <a href="pretest.html">Pre-test</a>
+            <a href="quicksortcode.html">Quick Sort Algorithm</a>
+            <a href="analysis.html">Analysis</a>
+            <a href="posttest.html">Post-test</a>
+            <a href="references.html">Further Readings/References</a>
+            <a href="feedback.html">Feedback</a>
+        </div>
+
+        <!-- Main content section -->
+        <div class="content">
+            <h1>Analysis of Quick Sort Algorithm</h1>
+
+            <!-- Introduction Section -->
+            <h2>Time Complexity of Quick Sort</h2>
+            <p>Quick Sort is an efficient sorting algorithm that uses the divide-and-conquer approach. Its time complexity varies based on the choice of pivot:</p>
+            <ul>
+                <li><strong>Best Case:</strong> O(n log n) - When the pivot divides the array into two equal halves.</li>
+                <li><strong>Average Case:</strong> O(n log n) - Generally occurs in random data.</li>
+                <li><strong>Worst Case:</strong> O(n²) - Happens when the smallest or largest element is consistently chosen as the pivot.</li>
+            </ul>
+
+            <!-- Pivot Selection Techniques Section -->
+            <h2>Pivot Selection Techniques</h2>
+            <p>The performance of Quick Sort heavily depends on how the pivot is chosen. Common strategies include:</p>
+            <ul>
+                <li><strong>First Element:</strong> Simple but can lead to poor performance on already sorted data.</li>
+                <li><strong>Random Element:</strong> Helps in achieving average case time complexity consistently.</li>
+                <li><strong>Median-of-Three:</strong> Selects the median of the first, middle, and last elements to improve performance.</li>
+            </ul>
+
+            <!-- Space Complexity Section -->
+            <h2>Space Complexity of Quick Sort</h2>
+            <p>The space complexity of Quick Sort is O(log n) due to the recursive stack space used for the divide-and-conquer approach. However, in the worst case, it can go up to O(n) for unbalanced partitions.</p>
+
+            <!-- Comparison with Other Sorting Algorithms Section -->
+            <h2>Comparison with Other Sorting Algorithms</h2>
+            <p>Quick Sort is often compared with other sorting algorithms:</p>
+            <ul>
+                <li><strong>Merge Sort:</strong> Guarantees O(n log n) time but requires additional space. Quick Sort is generally faster in practice due to better cache performance.</li>
+                <li><strong>Bubble Sort:</strong> Much slower with O(n²) time complexity, making Quick Sort far more efficient.</li>
+                <li><strong>Insertion Sort:</strong> Performs well on small or nearly sorted datasets but has O(n²) complexity, while Quick Sort maintains O(n log n) efficiency.</li>
+            </ul>
+
+            <!-- Table for Summary of Time and Space Complexities -->
+            <h2>Summary of Time and Space Complexities</h2>
+            <table border="1" cellpadding="10" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Operation</th>
+                        <th>Best Case</th>
+                        <th>Average Case</th>
+                        <th>Worst Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Sort</td>
+                        <td>O(n log n)</td>
+                        <td>O(n log n)</td>
+                        <td>O(n²)</td>
+                    </tr>
+                    <tr>
+                        <td>Space Complexity</td>
+                        <td colspan="3">O(log n) (worst case O(n))</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Button for Next Page -->
+            <div class="next-button">
+                <a href="posttest.html">Next</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

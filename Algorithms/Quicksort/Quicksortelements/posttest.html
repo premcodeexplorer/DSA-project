@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Sort Algorithm Posttest</title>
+    <link rel="stylesheet" href="../quicksort.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar with navigation links -->
+        <div class="sidebar" id="sidebar">
+            <a href="../quicksort.html">Home</a>
+            <a href="aim.html" class="active">Aim</a>
+            <a href="overview.html">Overview</a>
+            <a href="visualizer.html">Animation</a>
+            <a href="recap.html">Recap</a>
+            <a href="pretest.html">Pre-test</a>
+            <a href="quicksortcode.html">Quick Sort Algorithm</a>
+            <a href="analysis.html">Analysis</a>
+            <a href="posttest.html">Post-test</a>
+            <a href="references.html">Further Readings/References</a>
+            <a href="feedback.html">Feedback</a>
+        </div>
+        <div class="content posttest-content">
+            <h1>Quick Sort Algorithm Posttest</h1>
+            <form id="posttest-form">
+                <div id="post-questions"></div>
+                <button type="submit" class="posttest-button">Submit</button>
+            </form>
+            <button id="post-reset" class="posttest-button" style="display: none;">Reset</button>
+            <div id="post-result"></div>
+            <a href="references.html" class="btn">Next</a>
+        </div>
+    </div>
+
+    <script>
+        const postQuestions = [
+            {
+                question: "What is the primary strategy used by Quick Sort?",
+                options: ["Merge and conquer", "Divide and conquer", "Linear scanning", "Backtracking"],
+                answer: 1
+            },
+            {
+                question: "What is the average time complexity of Quick Sort?",
+                options: ["O(n)", "O(n log n)", "O(n^2)", "O(log n)"],
+                answer: 1
+            },
+            {
+                question: "Which of the following best describes the pivot in Quick Sort?",
+                options: ["The smallest element", "The largest element", "An element used to partition the array", "A random element"],
+                answer: 2
+            },
+            {
+                question: "What is a disadvantage of Quick Sort?",
+                options: ["It is always the fastest sorting algorithm", "It is not stable", "It requires additional memory", "It cannot handle duplicates"],
+                answer: 1
+            },
+            {
+                question: "In the worst-case scenario, what is the time complexity of Quick Sort?",
+                options: ["O(n log n)", "O(n)", "O(n^2)", "O(log n)"],
+                answer: 2
+            },
+            {
+                question: "Which of the following is a common method for choosing a pivot in Quick Sort?",
+                options: ["First element", "Median of three", "Random element", "All of the above"],
+                answer: 3
+            }
+        ];
+
+        const posttestForm = document.getElementById('posttest-form');
+        const postQuestionsContainer = document.getElementById('post-questions');
+        const postResultDiv = document.getElementById('post-result');
+        const postResetButton = document.getElementById('post-reset');
+
+        function renderPostQuestions() {
+            postQuestions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `
+                    <p>${index + 1}. ${q.question}</p>
+                    ${q.options.map((option, i) => `
+                        <label>
+                            <input type="radio" name="q${index}" value="${i}" required>
+                            ${option}
+                        </label>
+                    `).join('')}
+                `;
+                postQuestionsContainer.appendChild(questionDiv);
+            });
+        }
+
+        function calculatePostScore(formData) {
+            let score = 0;
+            postQuestions.forEach((q, index) => {
+                if (parseInt(formData.get(`q${index}`)) === q.answer) {
+                    score++;
+                }
+            });
+            return score;
+        }
+
+        posttestForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(posttestForm);
+            const score = calculatePostScore(formData);
+            postResultDiv.innerHTML = `
+                <h2>Your Result</h2>
+                <p>Your score: ${score} out of ${postQuestions.length}</p>
+                <h3>Correct Answers:</h3>
+                <ol>
+                    ${postQuestions.map((q, index) => `
+                        <li>
+                            ${q.question}<br>
+                            Correct answer: ${q.options[q.answer]}
+                        </li>
+                    `).join('')}
+                </ol>
+            `;
+            posttestForm.style.display = 'none';
+            postResetButton.style.display = 'block';
+            postResultDiv.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        postResetButton.addEventListener('click', () => {
+            posttestForm.reset();
+            posttestForm.style.display = 'block';
+            postResetButton.style.display = 'none';
+            postResultDiv.innerHTML = '';
+        });
+
+        renderPostQuestions();
+    </script>
+</body>
+</html>
