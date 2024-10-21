@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Dijkstra's Algorithm Visualization</title>
+    <link rel="stylesheet" href="../dijkstra.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -31,7 +32,7 @@
             gap: 10px;
             margin-bottom: 20px;
         }
-        button, select {
+        button {
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
@@ -50,12 +51,10 @@
         .node {
             fill: white;
             stroke: black;
-            cursor: pointer;
         }
         .node-text {
             font-size: 12px;
             text-anchor: middle;
-           
             pointer-events: none;
         }
         .edge {
@@ -84,13 +83,12 @@
     </style>
 </head>
 <body>
+   
     <h1>Interactive Dijkstra's Algorithm Visualization</h1>
     <div id="container">
         <div id="graphContainer">
             <svg id="graph"></svg>
             <div id="controls">
-                <select id="startNode"></select>
-                <select id="endNode"></select>
                 <button id="startButton">Start Algorithm</button>
                 <button id="stepButton" disabled>Step</button>
                 <button id="resetButton">Reset</button>
@@ -101,6 +99,10 @@
             <div id="stepInfo"></div>
             <h3>Distances</h3>
             <div id="distances"></div>
+           
+        </div>
+        <div>
+            <a href="dijkstra.html" class="btn">Next</a>
         </div>
     </div>
 
@@ -141,8 +143,8 @@
             { source: 'I', target: 'J', weight: 5 },
         ];
 
-        let startNodeId = 'A';
-        let endNodeId = 'J';
+        const startNodeId = 'A';
+        const endNodeId = 'J';
 
         function drawGraph() {
             svg.selectAll('*').remove();
@@ -193,7 +195,7 @@
         let algorithmSteps = [];
         let stepIndex = 0;
 
-        function initializeDijkstra(startNode) {
+        function initializeDijkstra() {
             distances = {};
             previous = {};
             unvisited = new Set(nodes.map(n => n.id));
@@ -203,8 +205,8 @@
                 previous[node.id] = null;
             });
 
-            distances[startNode] = 0;
-            currentNode = startNode;
+            distances[startNodeId] = 0;
+            currentNode = startNodeId;
             algorithmSteps = [];
             stepIndex = 0;
         }
@@ -294,39 +296,12 @@
                 .join('');
         }
 
-        const startNodeSelect = document.getElementById('startNode');
-        const endNodeSelect = document.getElementById('endNode');
         const startButton = document.getElementById('startButton');
         const stepButton = document.getElementById('stepButton');
         const resetButton = document.getElementById('resetButton');
 
-        nodes.forEach(node => {
-            const startOption = document.createElement('option');
-            startOption.value = node.id;
-            startOption.textContent = node.id;
-            startNodeSelect.appendChild(startOption);
-
-            const endOption = document.createElement('option');
-            endOption.value = node.id;
-            endOption.textContent = node.id;
-            endNodeSelect.appendChild(endOption);
-        });
-
-        startNodeSelect.value = startNodeId;
-        endNodeSelect.value = endNodeId;
-
-        startNodeSelect.addEventListener('change', (e) => {
-            startNodeId = e.target.value;
-            drawGraph();
-        });
-
-        endNodeSelect.addEventListener('change', (e) => {
-            endNodeId = e.target.value;
-            drawGraph();
-        });
-
         startButton.addEventListener('click', () => {
-            initializeDijkstra(startNodeId);
+            initializeDijkstra();
             while (dijkstraStep()) {}
             updateVisualization();
             startButton.disabled = true;
