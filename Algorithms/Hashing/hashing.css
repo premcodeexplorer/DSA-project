@@ -204,9 +204,8 @@ body {
 }
 /* Paragraph styling */
 .content p {
-    line-height: 1.8; /* Increased line spacing for readability */
-    color: #e0e0e0;
-    margin-bottom: 20px;
+    line-height: 1.6;
+    color: #333;
 }
 
 /* Unordered list styling */
