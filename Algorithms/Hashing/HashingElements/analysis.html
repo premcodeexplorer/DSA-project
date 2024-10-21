@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hashing Algorithm - Analysis</title>
+    <link rel="stylesheet" href="../hashing.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar with navigation links -->
+        <div class="sidebar" id="sidebar">
+            <h2>Hashing Algorithm</h2>
+            <a href="../hashing.html">Home</a>
+            <a href="aim.html">Aim</a>
+            <a href="overview.html">Overview</a>
+            <a href="recap.html">Recap</a>
+            <a href="pretest.html">Pretest</a>
+            <a href="hashingcode.html">Hashing Algorithm</a>
+            <a href="code-assessment.html">Code Assessment</a>
+            <a href="analysis.html" class="active">Analysis</a>
+            <a href="posttest.html">Posttest</a>
+            <a href="references.html">Further Readings/References</a>
+            <a href="feedback.html">Feedback</a>
+        </div>
+
+        <!-- Main content section -->
+        <div class="content">
+            <h1>Analysis of Hashing Algorithm</h1>
+
+            <!-- Introduction Section -->
+            <h2>Time Complexity of Hashing</h2>
+            <p>Hashing is an efficient technique for searching and indexing. The time complexity for insertion, deletion, and search operations in a perfect hashing function is O(1). However, in real-world scenarios, collisions occur, which can affect the performance:</p>
+            <ul>
+                <li><strong>Best Case:</strong> O(1) - No collisions</li>
+                <li><strong>Average Case:</strong> O(1) - Few collisions, handled efficiently</li>
+                <li><strong>Worst Case:</strong> O(n) - All keys hash to the same index (rare with good hash functions)</li>
+            </ul>
+
+            <!-- Collision Handling Section -->
+            <h2>Collision Handling Techniques</h2>
+            <p>Since collisions are inevitable in hashing, there are several ways to handle them:</p>
+            <ul>
+                <li><strong>Chaining:</strong> Store multiple elements in the same index using linked lists. Performance: O(1) in the best and average case, O(n) in the worst case.</li>
+                <li><strong>Open Addressing:</strong> All elements are stored in the hash table, and if a collision occurs, a probing sequence determines the next available slot. Types of open addressing include linear probing, quadratic probing, and double hashing.</li>
+            </ul>
+
+            <!-- Space Complexity Section -->
+            <h2>Space Complexity of Hashing</h2>
+            <p>The space complexity of a hashing algorithm depends on the size of the hash table and the data being stored. In general, space complexity is O(n), where 'n' is the number of elements. Extra space is required for collision resolution mechanisms like chaining (linked list structures) or open addressing (probing arrays).</p>
+
+            <!-- Comparison with Other Data Structures Section -->
+            <h2>Comparison with Other Data Structures</h2>
+            <p>Hashing is often compared with other data structures for searching and indexing tasks:</p>
+            <ul>
+                <li><strong>Arrays:</strong> Arrays offer O(1) access time, but resizing and unordered searches take O(n).</li>
+                <li><strong>Linked Lists:</strong> Hashing offers O(1) access time compared to O(n) in linked lists.</li>
+                <li><strong>Binary Search Trees:</strong> A balanced BST offers O(log n) access time, but hashing is faster with O(1) time.</li>
+            </ul>
+
+            <!-- Table for Summary of Time and Space Complexities -->
+            <h2>Summary of Time and Space Complexities</h2>
+            <table border="1" cellpadding="10" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Operation</th>
+                        <th>Best Case</th>
+                        <th>Average Case</th>
+                        <th>Worst Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Insert</td>
+                        <td>O(1)</td>
+                        <td>O(1)</td>
+                        <td>O(n)</td>
+                    </tr>
+                    <tr>
+                        <td>Search</td>
+                        <td>O(1)</td>
+                        <td>O(1)</td>
+                        <td>O(n)</td>
+                    </tr>
+                    <tr>
+                        <td>Delete</td>
+                        <td>O(1)</td>
+                        <td>O(1)</td>
+                        <td>O(n)</td>
+                    </tr>
+                    <tr>
+                        <td>Space Complexity</td>
+                        <td colspan="3">O(n)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Button for Next Page -->
+            <div class="next-button">
+                <a href="posttest.html">Next</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
