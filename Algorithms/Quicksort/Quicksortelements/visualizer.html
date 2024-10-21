@@ -3,21 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quick Sort Algorithm - Recap</title>
-    <link rel="stylesheet" href="../quicksort.css">
+    <title>QuickSort Visualization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            color: #333;
+        }
+        #array-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 300px;
+            width: 100%;
+            max-width: 800px;
+            margin: 20px 0;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .array-element {
+            width: 40px;
+            margin: 0 2px;
+            background-color: #3498db;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            color: white;
+            font-weight: bold;
+            border-radius: 4px 4px 0 0;
+        }
+        .array-element.active {
+            background-color: #e74c3c;
+        }
+        .array-element.sorted {
+            background-color: #2ecc71;
+        }
+        #controls {
+            margin-top: 20px;
+        }
+        button {
+            font-size: 16px;
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="sidebar" id="sidebar">
-            <a href="../quicksort.html">Home</a>
-            <a href="aim.html" class="active">Aim</a>
-            <a href="overview.html">Overview</a>
-            <a href="visualizer.html">Animation</a>
-            <a href="recap.html">Recap</a>
-            <a href="pretest.html">Pre-test</a>
-            <a href="quicksortcode.html">Quick Sort Algorithm</a>
-            <a href="analysis.html">Analysis</a>
-            <a href="posttest.html">Post-test</a>
-            <a href="references.html">Further Readings/References</a>
-            <a href="feedback.html">Feedback</a>
-        </div>
+    <h1>QuickSort Visualization</h1>
+    <div id="array-container"></div>
+    <div id="controls">
+        <button id="previousBtn">Previous</button>
+        <button id="nextBtn">Next</button>
+        <button id="resetBtn">Reset</button>
+    </div>
+
+    <script>
+        const initialArray = [64, 34, 25, 12, 22, 11, 90];
+        let sortingSteps = [];
+        let currentStep = 0;
+
+        function quickSort(arr, low, high) {
+            const steps = [];
+            
+            function partition(arr, low, high) {
+                const pivot = arr[high];
+                let i = low - 1;
+                
+                for (let j = low; j < high; j++) {
+                    if (arr[j] <= pivot) {
+                        i++;
+                        [arr[i], arr[j]] = [arr[j], arr[i]];
+                        steps.push({array: [...arr], active: [i, j]});
+                    }
+                }
+                
+                [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
+                steps.push({array: [...arr], active: [i + 1, high]});
+                return i + 1;
+            }
+            
+            function quickSortRecursive(arr, low, high) {
+                if (low < high) {
+                    const pi = partition(arr, low, high);
+                    quickSortRecursive(arr, low, pi - 1);
+                    quickSortRecursive(arr, pi + 1, high);
+                }
+            }
+            
+            quickSortRecursive(arr, low, high);
+            return steps;
+        }
+
+        function renderArray(step) {
+            const container = document.getElementById('array-container');
+            container.innerHTML = '';
+            
+            step.array.forEach((value, index) => {
+                const element = document.createElement('div');
+                element.classList.add('array-element');
+                element.style.height = `${value * 3}px`;
+                element.textContent = value;
+                
+                if (step.active && step.active.includes(index)) {
+                    element.classList.add('active');
+                }
+                
+                if (currentStep === sortingSteps.length - 1) {
+                    element.classList.add('sorted');
+                }
+                
+                container.appendChild(element);
+            });
+        }
+
+        function updateButtons() {
+            document.getElementById('previousBtn').disabled = currentStep === 0;
+            document.getElementById('nextBtn').disabled = currentStep === sortingSteps.length - 1;
+        }
+
+        function updateVisualization() {
+            renderArray(sortingSteps[currentStep]);
+            updateButtons();
+        }
+
+        document.getElementById('previousBtn').addEventListener('click', () => {
+            if (currentStep > 0) {
+                currentStep--;
+                updateVisualization();
+            }
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            if (currentStep < sortingSteps.length - 1) {
+                currentStep++;
+                updateVisualization();
+            }
+        });
+
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            currentStep = 0;
+            updateVisualization();
+        });
+
+        // Initialize the visualization
+        sortingSteps = quickSort(initialArray, 0, initialArray.length - 1);
+        updateVisualization();
+    </script>
+</body>
+</html>
+
+
+
