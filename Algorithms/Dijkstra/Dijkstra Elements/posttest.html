@@ -12,95 +12,73 @@
         <div class="sidebar" id="sidebar">
             <h2>Dijkstra Algorithm</h2>
             <a href="../dijkstra.html">Home</a>
-            <a href="aim.html" >Aim</a>
+            <a href="aim.html">Aim</a>
             <a href="overview.html">Overview</a>
             <a href="recap.html">Recap</a>
-            <a href="pretest.html" class="active">Pretest</a>
+            <a href="pretest.html">Pretest</a>
             <a href="dijkstra.html">Dijkstra's Algorithm</a>
             <a href="visual.html">Visualizer</a>
             <a href="analysis.html">Analysis</a>
-            <a href="posttest.html" >Posttest</a>
-            <a href="references.html">Further Readings/References</a>
+            <a href="posttest.html" class="active">Posttest</a>
+            <a href="further.html">Further Readings/References</a>
             <a href="feedback.html">Feedback</a>
             
         </div>
     <div class="container">
         <div class="content pretest-content">
-            <h1>Dijkstra's Algorithm Pretest</h1>
+            <h1>Dijkstra's Algorithm Posttest</h1>
             <form id="quiz-form">
                 <div id="questions"></div>
                 <button type="submit" class="pretest-button">Submit</button>
             </form>
             <button id="reset" class="pretest-button" style="display: none;">Reset</button>
             <div id="result"></div>
-            <a href="dijkstra.html" class="btn">Next</a>
+            <a href="further.html" class="btn">Next</a>
         </div>
         
     </div>
 
     <script>
         const questions = [
-            {
-                question: "What is the primary purpose of Dijkstra's algorithm?",
-                options: [
-                    "To find the shortest path between two nodes in a graph",
-                    "To sort an array of numbers",
-                    "To find the minimum spanning tree of a graph",
-                    "To perform matrix multiplication"
-                ],
-                answer: 0
-            },
-            {
-                question: "What type of graphs can Dijkstra's algorithm be applied to?",
-                options: [
-                    "Only undirected graphs",
-                    "Only directed graphs",
-                    "Both directed and undirected graphs with non-negative edge weights",
-                    "Graphs with negative edge weights"
-                ],
-                answer: 2
-            },
-            {
-                question: "What data structure is commonly used to implement Dijkstra's algorithm efficiently?",
-                options: [
-                    "Stack",
-                    "Queue",
-                    "Priority Queue",
-                    "Linked List"
-                ],
-                answer: 2
-            },
-            {
-                question: "What is the time complexity of Dijkstra's algorithm using a binary heap?",
-                options: [
-                    "O(V)",
-                    "O(E)",
-                    "O(V log V)",
-                    "O((V + E) log V)"
-                ],
-                answer: 3
-            },
-            {
-                question: "What is a limitation of Dijkstra's algorithm?",
-                options: [
-                    "It can only find paths between adjacent nodes",
-                    "It doesn't work on weighted graphs",
-                    "It fails on graphs with negative edge weights",
-                    "It only works on complete graphs"
-                ],
-                answer: 2
-            },
-            {
-                question: "Which algorithm is an improvement over Dijkstra's for sparse graphs?",
-                options: [
-                    "Breadth-First Search",
-                    "Depth-First Search",
-                    "A* Search",
-                    "Floyd-Warshall Algorithm"
-                ],
-                answer: 2
-            }
-        ];
+    {
+        question: "What is the time complexity of Dijkstra's algorithm? (V is the number of vertices in the graph)",
+        options: [
+            "O(V)",
+            "O(V^2)",
+            "O(log V)",
+            "None of the above"
+        ],
+        answer: 2
+    },
+    {
+        question: "Which of the following data structures can help decrease the time complexity of Dijkstra's algorithm?",
+        options: [
+            "Stack",
+            "Queue",
+            "Heap",
+            "Min Priority Queue"
+        ],
+        answer: 4
+    },
+    {
+        question: "Dijkstra's Algorithm can also be used on graphs with negative weights.",
+        options: [
+            "True",
+            "False"
+        ],
+        answer: 2
+    },
+    {
+        question: "Dijkstra's Algorithm is used to find:",
+        options: [
+            "Cycles in graph",
+            "Single source shortest path",
+            "Network flow",
+            "Sorted order of nodes"
+        ],
+        answer: 2
+    }
+];
 
         const quizForm = document.getElementById('quiz-form');
         const questionsContainer = document.getElementById('questions');
