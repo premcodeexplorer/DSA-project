@@ -78,20 +78,20 @@ body {
 }
 
 .content h3 {
-    color: #383838;
+    color: #121212;
     margin-bottom: 10px;
    font-size: 25px;
 }
 
 .content h4 {
-    color: #424141;
+    color: #0c0c0c;
     margin-bottom: 10px;
     font-size: 25px;
 }
 
 .content p {
     line-height: 1.8; /* Increased line spacing for readability */
-    color: #e0e0e0;
+    color: #0f0f0f;
     margin-bottom: 20px;
 }
 
