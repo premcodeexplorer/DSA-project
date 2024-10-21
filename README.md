@@ -12,6 +12,6 @@ The following individuals are working on this project:
 
 - **Prem Baba** – Hashing
 - **Pihu Patne** – Quick Sort
-- Om Patni - Dijkstra's Algorithm
+- **Om Patni**- Dijkstra's Algorithm
 
 

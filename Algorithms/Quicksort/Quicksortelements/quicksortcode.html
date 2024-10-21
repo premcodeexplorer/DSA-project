@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Sort: Step-by-Step Process</title>
+    <link rel="stylesheet" href="../quicksort.css"> <!-- Updated stylesheet link -->
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Sorting Algorithms</h2>
+            <a href="../sorting.html">Home</a>
+            <a href="aim.html">Aim</a>
+            <a href="overview.html">Overview</a>
+            <a href="recap.html">Recap</a>
+            <a href="pretest.html">Pretest</a>
+            <a href="quicksort.html" class="active">Quick Sort</a>
+            <a href="analysis.html">Analysis</a>
+            <a href="posttest.html">Posttest</a>
+            <a href="references.html">Further Readings/References</a>
+            <a href="feedback.html">Feedback</a>
+        </div>
+
+        <div class="content">
+            <h1>Quick Sort: Step-by-Step Process</h1>
+            <p>Let's go through a detailed example of the Quick Sort algorithm using an array of numbers. We'll sort the array step by step, illustrating the partitioning process.</p>
+
+            <h2>What is Quick Sort?</h2>
+            <p>Quick Sort is an efficient sorting algorithm that uses a divide-and-conquer strategy to sort elements. The basic idea is to select a 'pivot' element from the array and partition the other elements into two sub-arrays according to whether they are less than or greater than the pivot. The sub-arrays are then sorted recursively.</p>
+
+            <h2>How Quick Sort Works</h2>
+            <p>Quick Sort works as follows:</p>
+            <ol>
+                <li>Choose a pivot element from the array.</li>
+                <li>Partition the array into two halves: elements less than the pivot and elements greater than the pivot.</li>
+                <li>Recursively apply the above steps to the sub-arrays.</li>
+                <li>Combine the sorted sub-arrays and the pivot to produce the final sorted array.</li>
+            </ol>
+
+            <h2>Example: Sorting an Array</h2>
+            <p>We will sort the following array: <strong>[34, 7, 23, 32, 5, 62]</strong></p>
+
+            <div class="step">
+                <h3>Step 1: Choose a Pivot</h3>
+                <p>Let's choose the last element as the pivot: <strong>62</strong></p>
+                <p>We will partition the array based on this pivot.</p>
+                <div class="array">
+                    <div class="array-cell">34</div>
+                    <div class="array-cell">7</div>
+                    <div class="array-cell">23</div>
+                    <div class="array-cell">32</div>
+                    <div class="array-cell">5</div>
+                    <div class="array-cell pivot">62</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3>Step 2: Partition the Array</h3>
+                <p>Elements less than 62 will be on the left, and elements greater will be on the right.</p>
+                <div class="array">
+                    <div class="array-cell">34</div>
+                    <div class="array-cell">7</div>
+                    <div class="array-cell">23</div>
+                    <div class="array-cell">32</div>
+                    <div class="array-cell">5</div>
+                    <div class="array-cell pivot">62</div>
+                </div>
+                <p>After partitioning, the array remains the same since all elements are less than 62.</p>
+            </div>
+
+            <div class="step">
+                <h3>Step 3: Recursive Sort on Left Sub-array</h3>
+                <p>We now sort the left sub-array: <strong>[34, 7, 23, 32, 5]</strong></p>
+                <p>Choose a pivot (last element): <strong>5</strong></p>
+                <div class="array">
+                    <div class="array-cell">34</div>
+                    <div class="array-cell">7</div>
+                    <div class="array-cell">23</div>
+                    <div class="array-cell">32</div>
+                    <div class="array-cell pivot">5</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3>Step 4: Partition Left Sub-array</h3>
+                <p>Partition around pivot 5:</p>
+                <div class="array">
+                    <div class="array-cell pivot">5</div>
+                    <div class="array-cell">7</div>
+                    <div class="array-cell">23</div>
+                    <div class="array-cell">32</div>
+                    <div class="array-cell">34</div>
+                </div>
+                <p>Now we have <strong>[5, 7, 23, 32, 34]</strong></p>
+            </div>
+
+            <h2>Conclusion</h2>
+            <p>This example demonstrates how the Quick Sort algorithm works using the partitioning method and recursive sorting. Quick Sort is efficient for large datasets and is widely used in practice due to its average-case performance of O(n log n).</p>
+    
+            <a href="code-assessment.html" class="btn">Next</a>
+        </div>
+    </div>
+</body>
+</html>
+
