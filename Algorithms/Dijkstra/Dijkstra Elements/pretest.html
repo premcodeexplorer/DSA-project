@@ -4,41 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dijkstra's Algorithm Pretest</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-        }
-        .question {
-            margin-bottom: 20px;
-        }
-        button {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            font-size: 16px;
-        }
-        #result {
-            text-align: center;
-            font-weight: bold;
-            font-size: 18px;
-            margin-top: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="../dijkstra.css">
 </head>
 <body>
-    <h1>Dijkstra's Algorithm Pretest</h1>
-    <form id="quiz-form">
-        <div id="questions"></div>
-        <button type="submit">Submit</button>
-        <button type="button" id="reset">Reset</button>
-    </form>
-    <div id="result"></div>
+    <div class="container">
+        <!-- Sidebar with navigation links -->
+        <div class="sidebar" id="sidebar">
+            <h2>Dijkstra Algorithm</h2>
+            <a href="../dijkstra.html">Home</a>
+            <a href="aim.html" >Aim</a>
+            <a href="overview.html">Overview</a>
+            <a href="recap.html">Recap</a>
+            <a href="pretest.html" class="active">Pretest</a>
+            <a href="dijkstra.html">Dijkstra's Algorithm</a>
+            <a href="visual.html">Visualizer</a>
+            <a href="analysis.html">Analysis</a>
+            <a href="posttest.html" >Posttest</a>
+            <a href="references.html">Further Readings/References</a>
+            <a href="feedback.html">Feedback</a>
+            
+        </div>
+    <div class="container">
+        <div class="content pretest-content">
+            <h1>Dijkstra's Algorithm Pretest</h1>
+            <form id="quiz-form">
+                <div id="questions"></div>
+                <button type="submit" class="pretest-button">Submit</button>
+            </form>
+            <button id="reset" class="pretest-button" style="display: none;">Reset</button>
+            <div id="result"></div>
+            <a href="dijkstra.html" class="btn">Next</a>
+        </div>
+        
+    </div>
 
     <script>
         const questions = [
@@ -104,45 +102,65 @@
             }
         ];
 
+        const quizForm = document.getElementById('quiz-form');
+        const questionsContainer = document.getElementById('questions');
+        const resultDiv = document.getElementById('result');
+        const resetButton = document.getElementById('reset');
+
         function renderQuestions() {
-            const questionsContainer = document.getElementById('questions');
-            questionsContainer.innerHTML = '';
             questions.forEach((q, index) => {
                 const questionDiv = document.createElement('div');
-                questionDiv.classList.add('question');
+                questionDiv.className = 'question';
                 questionDiv.innerHTML = `
                     <p>${index + 1}. ${q.question}</p>
                     ${q.options.map((option, i) => `
                         <label>
-                            <input type="radio" name="q${index}" value="${i}">
+                            <input type="radio" name="q${index}" value="${i}" required>
                             ${option}
                         </label>
-                    `).join('<br>')}
+                    `).join('')}
                 `;
                 questionsContainer.appendChild(questionDiv);
             });
         }
 
-        function calculateScore() {
+        function calculateScore(formData) {
             let score = 0;
             questions.forEach((q, index) => {
-                const selected = document.querySelector(`input[name="q${index}"]:checked`);
-                if (selected && parseInt(selected.value) === q.answer) {
+                if (parseInt(formData.get(`q${index}`)) === q.answer) {
                     score++;
                 }
             });
             return score;
         }
 
-        document.getElementById('quiz-form').addEventListener('submit', function(e) {
+        quizForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const score = calculateScore();
-            document.getElementById('result').textContent = `Your score: ${score} out of ${questions.length}`;
+            const formData = new FormData(quizForm);
+            const score = calculateScore(formData);
+            resultDiv.innerHTML = `
+                <h2>Your Result</h2>
+                <p>Your score: ${score} out of ${questions.length}</p>
+                <h3>Correct Answers:</h3>
+                <ol>
+                    ${questions.map((q, index) => `
+                        <li>
+                            ${q.question}<br>
+                            Correct answer: ${q.options[q.answer]}
+                        </li>
+                    `).join('')}
+                </ol>
+            `;
+            quizForm.style.display = 'none';
+            resetButton.style.display = 'block';
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
         });
 
-        document.getElementById('reset').addEventListener('click', function() {
-            document.getElementById('quiz-form').reset();
-            document.getElementById('result').textContent = '';
+        resetButton.addEventListener('click', () => {
+            quizForm.reset();
+            quizForm.style.display = 'block';
+            resetButton.style.display = 'none';
+            resultDiv.innerHTML = '';
         });
 
         renderQuestions();
