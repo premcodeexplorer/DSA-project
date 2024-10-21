@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dijkstra's Algorithm - Analysis</title>
+    <link rel="stylesheet" href="../dijkstra.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar with navigation links -->
+        <div class="sidebar" id="sidebar">
+            <h2>Dijkstra Algorithm</h2>
+            <a href="../dijkstra.html">Home</a>
+            <a href="aim.html" >Aim</a>
+            <a href="overview.html">Overview</a>
+            <a href="recap.html">Recap</a>
+            <a href="pretest.html">Pretest</a>
+            <a href="dijkstra.html">Dijkstra's Algorithm</a>
+            <a href="visual.html">Visualizer</a>
+            <a href="analysis.html" class="active">Analysis</a>
+            <a href="posttest.html">Posttest</a>
+            <a href="references.html">Further Readings/References</a>
+            <a href="feedback.html">Feedback</a>
+        </div>
+
+        <!-- Main content section -->
+        <div class="content">
+            <h1>Analysis of Dijkstra's Algorithm</h1>
+
+            <!-- Running Time Section -->
+            <h2>Running Time of Dijkstra's Algorithm</h2>
+            <p>The time complexity of the given code/algorithm looks like O(V^2) as there are two nested while loops. If we take a closer look, we can observe that the statements in the inner loop are executed O(V + E) times (similar to BFS). The inner loop has a decreaseKey() operation which takes O(logV) time. So overall time complexity is O((E + V) * logV) which is O(E logV).</p>
+            <p>Note that the above code uses a Binary Heap for Priority Queue implementation. Time complexity can be reduced to O(E + V logV) using Fibonacci Heap. The reason is that Fibonacci Heap takes O(1) time for the decrease-key operation, while Binary Heap takes O(logn) time.</p>
+
+            <!-- Best and Worst Case Section -->
+            <h2>Best and Worst Cases for Dijkstra's Algorithm</h2>
+            <ul>
+                <li><strong>Worst Case:</strong> For connected graphs, the time complexity is Θ(|E| log |V|). The Fibonacci Heap improves this to O(|E| + |V| * log |V|).</li>
+                <li><strong>Average Case:</strong> When using Binary Heaps, the average case time complexity is O(|E| + |V| * log |E| / |V|), assuming the edge costs are drawn independently from a common probability distribution.</li>
+            </ul>
+
+            <!-- Table for Summary of Time Complexities -->
+            <h2>Summary of Time Complexities</h2>
+            <table border="1" cellpadding="10" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Scenario</th>
+                        <th>Time Complexity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Using Binary Heap</td>
+                        <td>O(E log V)</td>
+                    </tr>
+                    <tr>
+                        <td>Using Fibonacci Heap</td>
+                        <td>O(E + V log V)</td>
+                    </tr>
+                    <tr>
+                        <td>Worst Case</td>
+                        <td>Θ(|E| log |V|)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Button for Next Page -->
+            <div class="next-button">
+                <a href="posttest.html">Next</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
