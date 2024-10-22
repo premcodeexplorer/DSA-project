@@ -293,13 +293,13 @@ td {
 }
 
 .bucket.highlight {
-    background-color: #e6e6e6;
+    background-color: #43e41b;
     transform: scale(1.05);
 }
 
 .bucket.collision {
     background-color: #e74c3c;
-    color: white;
+    color: rgb(213, 7, 7);
 }
 
 #message, #calculation {

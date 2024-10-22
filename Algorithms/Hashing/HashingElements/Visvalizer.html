@@ -6,15 +6,7 @@
     <title>Prime Division Hashing Visualization</title>
     <link rel="stylesheet" href="../hashing.css">
     <link rel="stylesheet" href="visualizer.css">
-    <style>
-        /* Add this to your existing styles */
-        #message {
-            font-size: 18px;
-            margin-top: 20px;
-            color: #FFD700; /* Yellow color for search results */
-            font-weight: bold;
-        }
-    </style>
+    
 </head>
 <body>
     <div class="sidebar" id="sidebar">
@@ -155,7 +147,7 @@
         function showMessage(msg) {
             const messageElement = document.getElementById('message');
             messageElement.textContent = msg;
-            messageElement.style.color = '#FFD700'; // Set text color to yellow
+          
         }
 
         function showCalculation(value, index, isProbing = false) {
