@@ -33,7 +33,7 @@
         .back-btn:hover {
             background-color:  #23ef53;
         }
-        .hash-table {
+        /* .hash-table {
             display: flex;
             margin: 20px 0;
             gap: 10px;
@@ -73,7 +73,7 @@
             background-color: #f8f9fa;
             border-radius: 8px;
             border-left: 4px solid #4caf50;
-        }
+        } */
         .formula {
             background-color: #e8f5e9;
             padding: 10px;
@@ -114,111 +114,7 @@
                     <li>m is the table size</li>
                 </ul>
             </li>
-        </ul>
-
-        <h2>Step-by-Step Example</h2>
-        <p>Let's insert the following keys into a hash table of size 7:</p>
-        <p class="formula">Keys to insert: 22, 41, 58, 29, 16</p>
-        <p class="formula">Hash function: h(k) = k mod 7</p>
-
-        <div class="step">
-            <h3>Initial Empty Table</h3>
-            <div class="hash-table">
-                <div class="hash-cell"><span class="index">0</span></div>
-                <div class="hash-cell"><span class="index">1</span></div>
-                <div class="hash-cell"><span class="index">2</span></div>
-                <div class="hash-cell"><span class="index">3</span></div>
-                <div class="hash-cell"><span class="index">4</span></div>
-                <div class="hash-cell"><span class="index">5</span></div>
-                <div class="hash-cell"><span class="index">6</span></div>
-            </div>
-        </div>
-
-        <div class="step">
-            <h3>Step 1: Insert 22</h3>
-            <p class="formula">h(22) = 22 mod 7 = 1</p>
-            <div class="hash-table">
-                <div class="hash-cell"><span class="index">0</span></div>
-                <div class="hash-cell inserted">22<span class="index">1</span></div>
-                <div class="hash-cell"><span class="index">2</span></div>
-                <div class="hash-cell"><span class="index">3</span></div>
-                <div class="hash-cell"><span class="index">4</span></div>
-                <div class="hash-cell"><span class="index">5</span></div>
-                <div class="hash-cell"><span class="index">6</span></div>
-            </div>
-            <p>22 is inserted directly at index 1 (no collision)</p>
-        </div>
-
-        <div class="step">
-            <h3>Step 2: Insert 41</h3>
-            <p class="formula">h(41) = 41 mod 7 = 6</p>
-            <div class="hash-table">
-                <div class="hash-cell"><span class="index">0</span></div>
-                <div class="hash-cell inserted">22<span class="index">1</span></div>
-                <div class="hash-cell"><span class="index">2</span></div>
-                <div class="hash-cell"><span class="index">3</span></div>
-                <div class="hash-cell"><span class="index">4</span></div>
-                <div class="hash-cell"><span class="index">5</span></div>
-                <div class="hash-cell inserted">41<span class="index">6</span></div>
-            </div>
-            <p>41 is inserted directly at index 6 (no collision)</p>
-        </div>
-
-        <div class="step">
-            <h3>Step 3: Insert 58</h3>
-            <p class="formula">h(58) = 58 mod 7 = 2</p>
-            <div class="hash-table">
-                <div class="hash-cell"><span class="index">0</span></div>
-                <div class="hash-cell inserted">22<span class="index">1</span></div>
-                <div class="hash-cell inserted">58<span class="index">2</span></div>
-                <div class="hash-cell"><span class="index">3</span></div>
-                <div class="hash-cell"><span class="index">4</span></div>
-                <div class="hash-cell"><span class="index">5</span></div>
-                <div class="hash-cell inserted">41<span class="index">6</span></div>
-            </div>
-            <p>58 is inserted directly at index 2 (no collision)</p>
-        </div>
-
-        <div class="step">
-            <h3>Step 4: Insert 29</h3>
-            <p class="formula">h(29) = 29 mod 7 = 1</p>
-            <p class="formula">Collision at index 1!</p>
-            <div class="probe-sequence">
-                Quadratic probe sequence:
-                <br>Try 1: (1 + 1²) mod 7 = 2 (occupied)
-                <br>Try 2: (1 + 2²) mod 7 = 5 (empty!)
-            </div>
-            <div class="hash-table">
-                <div class="hash-cell"><span class="index">0</span></div>
-                <div class="hash-cell collision">22<span class="index">1</span></div>
-                <div class="hash-cell collision">58<span class="index">2</span></div>
-                <div class="hash-cell"><span class="index">3</span></div>
-                <div class="hash-cell"><span class="index">4</span></div>
-                <div class="hash-cell inserted">29<span class="index">5</span></div>
-                <div class="hash-cell inserted">41<span class="index">6</span></div>
-            </div>
-            <p>29 had a collision at index 1, quadratic probing found empty slot at index 5</p>
-        </div>
-
-        <div class="step">
-            <h3>Step 5: Insert 16</h3>
-            <p class="formula">h(16) = 16 mod 7 = 2</p>
-            <p class="formula">Collision at index 2!</p>
-            <div class="probe-sequence">
-                Quadratic probe sequence:
-                <br>Try 1: (2 + 1²) mod 7 = 3 (empty!)
-            </div>
-            <div class="hash-table">
-                <div class="hash-cell"><span class="index">0</span></div>
-                <div class="hash-cell inserted">22<span class="index">1</span></div>
-                <div class="hash-cell collision">58<span class="index">2</span></div>
-                <div class="hash-cell inserted">16<span class="index">3</span></div>
-                <div class="hash-cell"><span class="index">4</span></div>
-                <div class="hash-cell inserted">29<span class="index">5</span></div>
-                <div class="hash-cell inserted">41<span class="index">6</span></div>
-            </div>
-            <p>16 had a collision at index 2, quadratic probing found empty slot at index 3</p>
-        </div>
+       
 
         <h2>Comparison with Linear Probing</h2>
         <ul>
