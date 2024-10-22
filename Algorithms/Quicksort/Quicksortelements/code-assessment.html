@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Division Hashing Visualization</title>
+    <link rel="stylesheet" href="../hashing.css">
+    <link rel="stylesheet" href="visualizer.css">
+    <style>
+        #message {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #FFD700; /* Yellow color for search results */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <h2>Hashing Algorithm</h2>
+        <a href="../hashing.html">Home</a>
+        <a href="aim.html">Aim</a>
+        <a href="overview.html">Overview</a>
+        <a href="recap.html">Recap</a>
+        <a href="pretest.html">Pretest</a>
+        <a href="hashingcode.html">Hashing Algorithm</a>
+        <a href="code-assessment.html" class="active">Code Assessment</a>
+        <a href="analysis.html">Analysis</a>
+        <a href="posttest.html">Posttest</a>
+        <a href="references.html">Further Readings/References</a>
+        <a href="feedback.html">Feedback</a>
+    </div>
+    <div class="content">
+        <h1>Prime Division Hashing Visualization</h1>
+        <div class="description">
+            <h2>What is Prime Division Hashing?</h2>
+            <p>Prime Division Hashing is a method used to store and retrieve data in a hash table. It uses a prime number as the table size and calculates the index by taking the remainder of the value divided by the prime number. This visualization demonstrates how values are stored, how collisions are handled using linear probing, and how to search for values in the hash table.</p>
+        </div>
+        <div id="controls">
+            <input type="number" id="primeInput" placeholder="Enter a prime number">
+            <button onclick="setPrime()">Set Table Size</button>
+            <input type="number" id="valueInput" placeholder="Enter a number to store">
+            <button onclick="addValue()">Store Number</button>
+            <button onclick="resetTable()">Clear Table</button>
+            <input type="number" id="searchInput" placeholder="Enter a number to search">
+            <button onclick="searchValue()">Search Number</button>
+        </div>
+        <div id="calculation"></div>
+        <div id="hashTable"></div>
+        <div id="message"></div>
+        <div class="next-button">
+            <a href="analysis.html">Next</a>
+        </div>
+        <hr> <!-- Horizontal line added here -->
+    </div>
+
+    <script>
+        // Your existing JavaScript code here
+    </script>
+</body>
+</html>

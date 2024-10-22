@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Sort Algorithm - Virtual Lab</title>
+    <link rel="stylesheet" href="quicksort.css"> <!-- Link to Quick Sort CSS -->
+    <style>
+        /* Styles for the scroll to top button */
+        #scrollToTop {
+            display: none; /* Hidden by default */
+            position: fixed;
+            bottom: 30px; /* Position it slightly above the bottom */
+            right: 30px; /* Position it to the right */
+            background-color: #4CAF50; /* Green background */
+            color: white; /* White text */
+            border: none; /* No border */
+            padding: 10px 15px; /* Padding for the button */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            z-index: 1000; /* On top of other elements */
+            font-size: 16px; /* Font size */
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+
+        /* Change color on hover */
+        #scrollToTop:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+        .active {
+            background-color: #4CAF50; /* Change this to your desired color */
+            color: white; /* Change text color if necessary */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar" id="sidebar">
+            <h2>Quick Sort Algorithm</h2>
+            <a href="index.html" class="active">Home</a>
+            <a href="aim.html">Aim</a>
+            <a href="overview.html">Overview</a>
+            <a href="recap.html">Recap</a>
+            <a href="pretest.html">Pretest</a>
+            <a href="quicksort_visualizer.html">Quick Sort Visualizer</a>
+            <a href="analysis.html">Analysis</a>
+            <a href="posttest.html">Posttest</a>
+            <a href="references.html">Further Readings/References</a>
+            <a href="feedback.html">Feedback</a>
+        </div>
+        <div class="content">
+            <h1>Welcome to Quick Sort Algorithm Virtual Lab</h1>
+            <p>Please select a topic from the sidebar to begin your learning journey.</p>
+            <a href="aim.html" class="btn">Start Lab</a>
+        </div>
+    </div>
+
+    <button id="scrollToTop">Scroll to Top</button>
+
+    <script>
+        // Highlight the active link
+        const links = document.querySelectorAll('.sidebar a');
+        const currentPage = window.location.pathname.split('/').pop();
+
+        links.forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            }
+        });
+
+        // Show scroll to top button when scrolling down
+        const scrollToTopButton = document.getElementById('scrollToTop');
+
+        window.onscroll = function() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollToTopButton.style.display = 'block'; // Show button
+            } else {
+                scrollToTopButton.style.display = 'none'; // Hide button
+            }
+        };
+
+        // Scroll to top when button is clicked
+        scrollToTopButton.addEventListener('click', () => {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+    </script>
+</body>
+</html>

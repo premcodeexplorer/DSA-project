@@ -4,32 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quick Sort Algorithm - Recap</title>
-    <link rel="stylesheet" href="../quicksort.css">
+    <link rel="stylesheet" href="quicksort.css"> <!-- Ensure this CSS file exists -->
 </head>
 <body>
     <div class="container">
         <div class="sidebar" id="sidebar">
-            <a href="../quicksort.html">Home</a>
-            <a href="aim.html" class="active">Aim</a>
+            <h2>Quick Sort Algorithm</h2>
+            <a href="../hashing.html">Home</a>
+            <a href="aim.html">Aim</a>
             <a href="overview.html">Overview</a>
-            <a href="visualizer.html">Animation</a>
-            <a href="recap.html">Recap</a>
-            <a href="pretest.html">Pre-test</a>
-            <a href="quicksortcode.html">Quick Sort Algorithm</a>
+            <a href="recap.html" class="active">Recap</a>
+            <a href="pretest.html">Pretest</a>
+            <a href="quicksort_visualizer.html">Quick Sort Visualizer</a>
             <a href="analysis.html">Analysis</a>
-            <a href="posttest.html">Post-test</a>
+            <a href="posttest.html">Posttest</a>
             <a href="references.html">Further Readings/References</a>
             <a href="feedback.html">Feedback</a>
         </div>
         <div class="content">
             <h1>Recap of Quick Sort Algorithm</h1>
 
-            <h2>Pictorial Representation of Quick Sort</h2>
-            <p>This section illustrates how the Quick Sort algorithm works with visual representations of the sorting process.</p>
+            <h2>What is Quick Sort?</h2>
+            <p>Quick Sort is a highly efficient sorting algorithm that uses a divide-and-conquer strategy to sort elements in an array. It selects a 'pivot' element and partitions the other elements into two sub-arrays, according to whether they are less than or greater than the pivot.</p>
 
-            <h2>Importance of Quick Sort in Real Life</h2>
-            <p>Quick Sort plays a crucial role in several real-life applications, providing efficient sorting capabilities:</p>
+            <h2>How Quick Sort Works</h2>
+            <p>The Quick Sort algorithm follows these steps:</p>
+            <ol>
+                <li>Choose a pivot element from the array.</li>
+                <li>Partition the array into two halves: elements less than the pivot and elements greater than the pivot.</li>
+                <li>Recursively apply the above steps to the sub-arrays.</li>
+                <li>Combine the sorted sub-arrays and the pivot to get the sorted array.</li>
+            </ol>
+
+            <h2>Time and Space Complexity</h2>
+            <p>The efficiency of Quick Sort can be evaluated through its time and space complexity:</p>
             <ul>
-                <li><strong>Sorting Data:</strong> Quick Sort is widely used for sorting large datasets quickly and efficiently.</li>
-                <li><strong>Data Processing:</strong> Quick Sort is utilized in applications requiring frequent sorting, like search engines and databases.</li>
-                <li><strong>Real-Time Systems:</strong> Its efficient p
+                <li><strong>Average Time Complexity:</strong> O(n log n)</li>
+                <li><strong>Worst Time Complexity:</strong> O(n<sup>2</sup>) (occurs when the smallest or largest element is always chosen as the pivot)</li>
+                <li><strong>Space Complexity:</strong> O(log n) due to the recursion stack</li>
+            </ul>
+
+            <h2>Advantages of Quick Sort</h2>
+            <ul>
+                <li>Efficient for large datasets</li>
+                <li>In-place sorting algorithm (requires minimal additional memory)</li>
+                <li>Generally faster in practice compared to other O(n log n) algorithms, like Merge Sort and Heap Sort</li>
+            </ul>
+
+            <h2>Disadvantages of Quick Sort</h2>
+            <ul>
+                <li>Performance can degrade on already sorted data</li>
+                <li>Not stable, meaning equal elements may not retain their relative order</li>
+            </ul>
+
+            <h2>Conclusion</h2>
+            <p>Quick Sort is a widely used and efficient sorting algorithm that is suitable for various applications. Understanding its mechanics and complexities is crucial for implementing it effectively in programming tasks.</p>
+
+            <div class="next-button">
+                <a href="pretest.html">Next</a>
+            </div> <!-- Change the link to the desired next page -->
+        </div>
+    </div>
+</body>
+</html>
